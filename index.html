@@ -5,209 +5,772 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>阿杰的AI探索站</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --text-primary: #212529;
+            --text-secondary: #6c757d;
+            --accent: #0d6efd;
+            --accent-hover: #0b5ed7;
+            --border: #dee2e6;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        [data-theme="dark"] {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #e9ecef;
+            --text-secondary: #adb5bd;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --border: #374151;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background: #f8f9fa;
-            color: #212529;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
             transition: all 0.3s ease;
         }
-        body.dark-mode {
-            background: #121212;
-            color: #e9ecef;
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        .mode-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 25px;
-            background: #6c757d;
-            color: white;
-            cursor: pointer;
+        
+        /* 顶部导航 */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .logo {
+            font-size: 1.8rem;
             font-weight: bold;
-        }
-        .mode-toggle:hover {
-            background: #495057;
-        }
-        h1 {
-            color: #0d6efd;
-            border-bottom: 3px solid #0d6efd;
-            padding-bottom: 10px;
-        }
-        .section {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-        .dark-mode .section {
-            background: #1e1e1e;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        h2 {
-            color: #198754;
+            color: var(--accent);
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        h2::before {
-            content: "▶";
-            font-size: 0.8em;
-            color: #6c757d;
-        }
-        .resource {
-            background: #e7f5ff;
-            border-left: 4px solid #0d6efd;
-            padding: 15px;
-            margin: 15px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        .dark-mode .resource {
-            background: #1a365d;
-        }
-        .interactive {
-            background: #f8f9fa;
-            border: 2px dashed #6c757d;
-            padding: 20px;
-            text-align: center;
-            border-radius: 10px;
-            margin: 20px 0;
+        
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .interactive:hover {
-            background: #e9ecef;
+        
+        .theme-toggle:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
         }
-        .dark-mode .interactive {
-            background: #2d3748;
-            border-color: #4a5568;
-        }
-        .interactive:hover {
-            background: #4a5568;
-        }
-        footer {
+        
+        /* Hero 区域 */
+        .hero {
             text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 模块卡片 */
+        .modules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .module-card {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+        
+        .module-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .module-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .module-desc {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        
+        .expand-hint {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* 详情区域 */
+        .module-details {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px var(--shadow);
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+        
+        .module-details.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .details-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .close-btn {
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .close-btn:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+        
+        .details-content {
+            line-height: 1.8;
+        }
+        
+        .details-content h3 {
+            color: var(--accent);
+            margin: 25px 0 15px 0;
+            font-size: 1.3rem;
+        }
+        
+        .resource-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .resource-item {
+            background: var(--bg-primary);
+            padding: 15px 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+        
+        .resource-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px var(--shadow);
+        }
+        
+        .resource-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+        
+        .resource-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        /* 时间线 */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 25px;
+            padding-left: 20px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            background: var(--accent);
+            border-radius: 50%;
+            border: 3px solid var(--bg-secondary);
+        }
+        
+        .timeline-year {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+        
+        /* 页脚 */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+            border-top: 2px solid var(--border);
             margin-top: 50px;
-            color: #6c757d;
-            font-size: 0.9em;
+        }
+        
+        .visitor-count {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-secondary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 15px;
+            box-shadow: 0 3px 10px var(--shadow);
+        }
+        
+        .visitor-icon {
+            font-size: 1.5rem;
+        }
+        
+        .visitor-number {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .modules {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+        
+        /* 加载动画 */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--bg-secondary);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
-    <button class="mode-toggle" onclick="toggleMode()">🌙 切换黑夜模式</button>
-    
-    <h1>🤖 阿杰的AI探索站</h1>
-    <p>欢迎来到我的AI学习空间！这里记录了我在人工智能领域的探索历程。</p>
-    
-    <div class="section">
-        <h2>📜 人工智能发展历史</h2>
-        <p>从1956年达特茅斯会议提出"人工智能"概念，到今天的ChatGPT，AI走过了60多年的发展历程。</p>
-        <div class="interactive" onclick="showTimeline()">
-            🕰️ 点击查看AI发展时间线
+    <div class="container">
+        <!-- 顶部导航 -->
+        <header class="header">
+            <div class="logo">
+                🤖 阿杰的AI探索站
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span id="theme-icon">🌙</span>
+                <span id="theme-text">黑夜模式</span>
+            </button>
+        </header>
+        
+        <!-- Hero 区域 -->
+        <div class="hero">
+            <h1>探索人工智能的无限可能</h1>
+            <p>从历史到未来，从理论到实践，一起开启AI学习之旅</p>
         </div>
+        
+        <!-- 模块卡片 -->
+        <div class="modules">
+            <div class="module-card" onclick="showDetails('history')">
+                <div class="module-icon">📜</div>
+                <div class="module-title">发展历史</div>
+                <div class="module-desc">回顾AI 60多年的发展历程，见证技术变革</div>
+                <div class="expand-hint">点击查看详情 →</div>
+            </div>
+            
+            <div class="module-card" onclick="showDetails('ml')">
+                <div class="module-icon">🧠</div>
+                <div class="module-title">机器学习</div>
+                <div class="module-desc">让计算机从数据中学习，发现隐藏规律</div>
+                <div class="expand-hint">点击查看详情 →</div>
+            </div>
+            
+            <div class="module-card" onclick="showDetails('dl')">
+                <div class="module-icon">🔬</div>
+                <div class="module-title">深度学习</div>
+                <div class="module-desc">基于神经网络的学习方法，突破AI瓶颈</div>
+                <div class="expand-hint">点击查看详情 →</div>
+            </div>
+            
+            <div class="module-card" onclick="showDetails('llm')">
+                <div class="module-icon">🌐</div>
+                <div class="module-title">大语言模型</div>
+                <div class="module-desc">GPT、LLaMA等巨型模型，理解与生成人类语言</div>
+                <div class="expand-hint">点击查看详情 →</div>
+            </div>
+            
+            <div class="module-card" onclick="showDetails('agent')">
+                <div class="module-icon">🤖</div>
+                <div class="module-title">AI Agent</div>
+                <div class="module-desc">感知环境、做出决策、执行行动的智能体</div>
+                <div class="expand-hint">点击查看详情 →</div>
+            </div>
+        </div>
+        
+        <!-- 详情区域 -->
+        <div id="details-history" class="module-details">
+            <div class="details-header">
+                <h2>📜 人工智能发展历史</h2>
+                <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
+            </div>
+            <div class="details-content">
+                <p>人工智能（Artificial Intelligence，AI）的概念最早可以追溯到1956年的达特茅斯会议，由约翰·麦卡锡等人提出。从那时起，AI经历了多次繁荣与寒冬的交替。</p>
+                
+                <h3>关键里程碑</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1956</div>
+                        <div>达特茅斯会议，AI正式诞生</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1958</div>
+                        <div>感知机（Perceptron）算法提出</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1966</div>
+                        <div>ELIZA聊天机器人诞生</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1980s</div>
+                        <div>专家系统兴起，AI第一次商业化浪潮</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">1997</div>
+                        <div>深蓝击败国际象棋世界冠军卡斯帕罗夫</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2012</div>
+                        <div>AlexNet在ImageNet竞赛中夺冠，深度学习革命开始</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2016</div>
+                        <div>AlphaGo击败围棋世界冠军李世石</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2017</div>
+                        <div>Transformer架构提出，奠定大模型基础</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2022</div>
+                        <div>ChatGPT发布，AI进入新时代</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="details-ml" class="module-details">
+            <div class="details-header">
+                <h2>🧠 机器学习</h2>
+                <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
+            </div>
+            <div class="details-content">
+                <p>机器学习（Machine Learning，ML）是AI的核心子领域，它使计算机能够从数据中学习，而无需显式编程。通过分析大量数据，机器学习算法可以发现模式、做出预测和决策。</p>
+                
+                <h3>主要类型</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <div class="resource-title">监督学习</div>
+                        <div class="resource-desc">使用标注数据训练模型，如分类和回归问题</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">无监督学习</div>
+                        <div class="resource-desc">从未标注数据中发现隐藏结构，如聚类和降维</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">强化学习</div>
+                        <div class="resource-desc">通过与环境交互获得奖励来学习最优策略</div>
+                    </li>
+                </ul>
+                
+                <h3>📚 学习资源</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <div class="resource-title">吴恩达《机器学习》课程</div>
+                        <div class="resource-desc">Coursera经典入门课程，深入浅出讲解ML基础</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">《Python机器学习》</div>
+                        <div class="resource-desc">Sebastian Raschka著，实战导向的Python ML教程</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">Kaggle实战项目</div>
+                        <div class="resource-desc">参与竞赛和项目，在实践中提升技能</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">Scikit-learn官方文档</div>
+                        <div class="resource-desc">Python机器学习库的权威文档和教程</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="details-dl" class="module-details">
+            <div class="details-header">
+                <h2>🔬 深度学习</h2>
+                <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
+            </div>
+            <div class="details-content">
+                <p>深度学习（Deep Learning，DL）是机器学习的一个分支，它基于人工神经网络，特别是深层神经网络。深度学习在图像识别、语音识别、自然语言处理等领域取得了突破性进展。</p>
+                
+                <h3>核心概念</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <div class="resource-title">神经网络</div>
+                        <div class="resource-desc">模仿人脑神经元结构的计算模型</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">卷积神经网络（CNN）</div>
+                        <div class="resource-desc">专门处理图像数据的网络结构</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">循环神经网络（RNN）</div>
+                        <div class="resource-desc">处理序列数据的网络，如文本和时间序列</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">Transformer</div>
+                        <div class="resource-desc">基于注意力机制的革命性架构</div>
+                    </li>
+                </ul>
+                
+                <h3>📚 学习资源</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <div class="resource-title">《深度学习》花书</div>
+                        <div class="resource-desc">Ian Goodfellow等著，深度学习领域的圣经</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">PyTorch官方教程</div>
+                        <div class="resource-desc">深度学习框架PyTorch的官方学习路径</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">Fast.ai实战课程</div>
+                        <div class="resource-desc">自顶向下的深度学习教学方法，快速上手</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">CS231n斯坦福课程</div>
+                        <div class="resource-desc">计算机视觉与深度学习的经典课程</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="details-llm" class="module-details">
+            <div class="details-header">
+                <h2>🌐 大语言模型</h2>
+                <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
+            </div>
+            <div class="details-content">
+                <p>大语言模型（Large Language Models，LLM）是基于Transformer架构的巨型神经网络，拥有数千亿参数。它们通过在海量文本数据上预训练，能够理解和生成人类语言，展现出惊人的能力。</p>
+                
+                <h3>代表性模型</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <div class="resource-title">GPT系列</div>
+                        <div class="resource-desc">OpenAI开发的生成式预训练Transformer模型</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">LLaMA</div>
+                        <div class="resource-desc">Meta开源的大语言模型系列</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">Claude</div>
+                        <div class="resource-desc">Anthropic开发的注重安全性的大模型</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">文心一言、通义千问</div>
+                        <div class="resource-desc">国内领先的大语言模型</div>
+                    </li>
+                </ul>
+                
+                <h3>📚 学习资源</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <div class="resource-title">《Attention Is All You Need》论文</div>
+                        <div class="resource-desc">Transformer架构的原始论文，必读经典</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">Hugging Face Transformers</div>
+                        <div class="resource-desc">最流行的NLP库，提供海量预训练模型</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">OpenAI API开发指南</div>
+                        <div class="resource-desc">如何使用GPT API构建应用</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">LangChain框架</div>
+                        <div class="resource-desc">构建LLM应用的强大框架</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="details-agent" class="module-details">
+            <div class="details-header">
+                <h2>🤖 AI Agent</h2>
+                <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
+            </div>
+            <div class="details-content">
+                <p>AI Agent（人工智能智能体）是能够感知环境、做出决策并执行行动的智能系统。与传统的被动式AI不同，Agent具有自主性和目标导向性，能够主动与环境交互，完成复杂任务。</p>
+                
+                <h3>核心能力</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <div class="resource-title">感知能力</div>
+                        <div class="resource-desc">通过传感器或API获取环境信息</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">决策能力</div>
+                        <div class="resource-desc">基于感知信息和目标做出最优决策</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">执行能力</div>
+                        <div class="resource-desc">通过工具或API执行具体行动</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">学习能力</div>
+                        <div class="resource-desc">从经验中不断改进性能</div>
+                    </li>
+                </ul>
+                
+                <h3>📚 学习资源</h3>
+                <ul class="resource-list">
+                    <li class="resource-item">
+                        <div class="resource-title">《Reinforcement Learning》</div>
+                        <div class="resource-desc">Sutton & Barto著，强化学习领域的圣经</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">LangChain Agents文档</div>
+                        <div class="resource-desc">构建LLM Agent的完整指南</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">AutoGPT开源项目</div>
+                        <div class="resource-desc">自主AI Agent的先驱项目</div>
+                    </li>
+                    <li class="resource-item">
+                        <div class="resource-title">BabyAGI</div>
+                        <div class="resource-desc">任务驱动的AI Agent实现</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 页脚 -->
+        <footer class="footer">
+            <p>© 2024 阿杰的AI探索站 | 持续更新中...</p>
+            <div class="visitor-count">
+                <span class="visitor-icon">👥</span>
+                <span>您是第 </span>
+                <span class="visitor-number" id="visitor-count">1</span>
+                <span> 位访客</span>
+            </div>
+        </footer>
     </div>
     
-    <div class="section">
-        <h2>🧠 机器学习</h2>
-        <p>让计算机从数据中学习规律，而无需显式编程。</p>
-        <div class="resource">
-            <strong>📚 学习资源：</strong>
-            <ul>
-                <li>吴恩达《机器学习》课程（Coursera）</li>
-                <li>《Python机器学习》Sebastian Raschka</li>
-                <li>Kaggle实战项目</li>
-            </ul>
-        </div>
-        <div class="interactive" onclick="showMLDemo()">
-            🎯 点击体验简单的分类演示
-        </div>
-    </div>
-    
-    <div class="section">
-        <h2>🔬 深度学习</h2>
-        <p>基于神经网络的机器学习方法，在图像、语音、自然语言处理等领域取得突破。</p>
-        <div class="resource">
-            <strong>📚 学习资源：</strong>
-            <ul>
-                <li>《深度学习》花书（Ian Goodfellow）</li>
-                <li>PyTorch官方教程</li>
-                <li>Fast.ai实战课程</li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="section">
-        <h2>🌐 大语言模型</h2>
-        <p>基于Transformer架构的巨型神经网络，如GPT、LLaMA等，能够理解和生成人类语言。</p>
-        <div class="resource">
-            <strong>📚 学习资源：</strong>
-            <ul>
-                <li>《Attention Is All You Need》论文精读</li>
-                <li>Hugging Face Transformers库文档</li>
-                <li>OpenAI API开发指南</li>
-            </ul>
-        </div>
-        <div class="interactive" onclick="askAI()">
-            💬 点击向AI提问（模拟）
-        </div>
-    </div>
-    
-    <div class="section">
-        <h2>🤖 AI Agent</h2>
-        <p>能够感知环境、做出决策并执行行动的智能体，是AI应用的未来方向。</p>
-        <div class="resource">
-            <strong>📚 学习资源：</strong>
-            <ul>
-                <li>《Reinforcement Learning》Sutton & Barto</li>
-                <li>LangChain框架文档</li>
-                <li>AutoGPT开源项目</li>
-            </ul>
-        </div>
-    </div>
-    
-    <footer>
-        <p>© 2024 阿杰的AI探索站 | 持续更新中...</p>
-        <p id="visit-count">您是第 <span id="count">1</span> 位访客</p>
-    </footer>
     <script>
         // 黑夜模式切换
-        function toggleMode() {
-            document.body.classList.toggle('dark-mode');
-            const btn = document.querySelector('.mode-toggle');
-            btn.textContent = document.body.classList.contains('dark-mode') 
-                ? '☀️ 切换白天模式' 
-                : '🌙 切换黑夜模式';
-        }
-        
-        // 访客计数
-        let count = localStorage.getItem('visitCount') || 1;
-        document.getElementById('count').textContent = count;
-        localStorage.setItem('visitCount', parseInt(count) + 1);
-        
-        // 交互功能
-        function showTimeline() {
-            alert('1956: AI诞生\n1980s: 专家系统\n1997: 深蓝击败卡斯帕罗夫\n2012: AlexNet引发深度学习革命\n2022: ChatGPT发布');
-        }
-        
-        function showMLDemo() {
-            alert('这里可以接入一个简单的机器学习演示，比如手写数字识别或鸢尾花分类');
-        }
-        
-        function askAI() {
-            const question = prompt('想问AI什么问题？');
-            if (question) {
-                alert(`AI思考中...\n\n关于"${question}"，我的初步理解是：这是一个很好的问题！建议查阅相关文献或实践项目来深入理解。`);
+        function toggleTheme() {
+            const body = document.body;
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            
+            if (isDark) {
+                body.removeAttribute('data-theme');
+                document.getElementById('theme-icon').textContent = '🌙';
+                document.getElementById('theme-text').textContent = '黑夜模式';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-icon').textContent = '☀️';
+                document.getElementById('theme-text').textContent = '白天模式';
+                localStorage.setItem('theme', 'dark');
             }
         }
         
-        // 页面加载时检查偏好
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            toggleMode(); // 自动切换到黑夜模式
+        // 显示详情
+        function showDetails(moduleId) {
+            // 隐藏所有详情
+            document.querySelectorAll('.module-details').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // 显示选中的详情
+            const details = document.getElementById(`details-${moduleId}`);
+            if (details) {
+                details.classList.add('active');
+                // 平滑滚动到详情区域
+                details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
+        
+        // 关闭详情
+        function closeDetails() {
+            document.querySelectorAll('.module-details').forEach(el => {
+                el.classList.remove('active');
+            });
+        }
+        
+        // 访客计数
+        function initVisitorCount() {
+            let count = localStorage.getItem('visitorCount') || 1;
+            document.getElementById('visitor-count').textContent = count;
+            localStorage.setItem('visitorCount', parseInt(count) + 1);
+        }
+        
+        // 初始化主题
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                document.body.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-icon').textContent = '☀️';
+                document.getElementById('theme-text').textContent = '白天模式';
+            }
+        }
+        
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            initVisitorCount();
+            
+            // 添加滚动动画效果
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.module-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+                observer.observe(card);
+            });
+        });
     </script>
 </body>
 </html>
