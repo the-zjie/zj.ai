@@ -284,7 +284,7 @@
             color: var(--accent);
         }
         
-        /* 弹幕开关 */
+        /* 弹幕开关 - 真正可控制 */
         .danmaku-control {
             display: flex;
             align-items: center;
@@ -433,306 +433,343 @@
             color: white;
         }
         
-        /* 个人文章 */
-        .article-form {
+        /* 文章社区入口 */
+        .community-shortcut {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .community-item {
             background: var(--bg-primary);
-            padding: 15px;
+            padding: 12px 15px;
             border-radius: 10px;
-            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid var(--accent);
         }
         
-        .article-input {
-            width: 100%;
+        .community-item:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateX(-3px);
+        }
+        
+        .community-title {
+            font-weight: bold;
+            margin-bottom: 3px;
+        }
+        
+        .community-count {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .community-item:hover .community-count {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* 文章区域（主内容） */
+        .articles-section {
             background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            padding: 10px 15px;
-            color: var(--text-primary);
-            font-size: 0.95rem;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .article-card {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+        
+        .article-card-header {
             margin-bottom: 10px;
         }
         
-        .article-input:focus {
-            outline: none;
-            border-color: var(--accent);
+        .article-card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--text-primary);
         }
         
-        .article-textarea {
+        .article-card-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .article-card-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        /* 文章详情 */
+        .article-detail {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px var(--shadow);
+            display: none;
+        }
+        
+        .article-detail.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .article-detail-header {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .article-detail-title {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .article-detail-meta {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 20px;
+        }
+        
+        .article-detail-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            margin-bottom: 30px;
+        }
+        
+        .article-comments {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid var(--border);
+        }
+        
+        .article-comments-title {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .article-comment-form {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .article-comment-input {
             width: 100%;
             background: var(--bg-secondary);
             border: 2px solid var(--border);
-            border-radius: 8px;
-            padding: 10px 15px;
+            border-radius: 10px;
+            padding: 15px;
             color: var(--text-primary);
-            font-size: 0.95rem;
-            min-height: 80px;
+            font-size: 1rem;
             resize: vertical;
+            min-height: 80px;
             margin-bottom: 10px;
         }
         
-        .article-textarea:focus {
+        .article-comment-input:focus {
             outline: none;
             border-color: var(--accent);
         }
         
-        .submit-article-btn {
-            width: 100%;
+        .article-comment-submit {
             background: var(--accent);
             color: white;
             border: none;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 10px 20px;
+            border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        .submit-article-btn:hover {
+        .article-comment-submit:hover {
             background: var(--accent-hover);
             transform: translateY(-2px);
         }
         
-        .article-list {
+        .article-comment-list {
             list-style: none;
             padding: 0;
         }
         
-        .article-item {
+        .article-comment-item {
             background: var(--bg-primary);
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 10px;
-            border-left: 4px solid var(--accent);
+            border-left: 3px solid var(--accent);
         }
         
-        .article-title {
-            font-weight: bold;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-        
-        .article-content {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-        
-        .article-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .article-action {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: color 0.3s ease;
-        }
-        
-        .article-action:hover {
-            color: var(--accent);
-        }
-        
-        /* 私聊系统 */
-        .chat-users {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .chat-user {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 15px;
-            background: var(--bg-primary);
-            border-radius: 10px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .chat-user:hover {
-            background: var(--bg-secondary);
-        }
-        
-        .chat-user.active {
-            background: var(--accent);
-            color: white;
-        }
-        
-        .chat-user-avatar {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.8rem;
-        }
-        
-        .chat-user-info {
-            flex: 1;
-        }
-        
-        .chat-user-name {
-            font-weight: bold;
-            font-size: 0.95rem;
-        }
-        
-        .chat-user-status {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-        }
-        
-        .chat-user.active .chat-user-status {
-            color: rgba(255,255,255,0.8);
-        }
-        
-        .unread-badge {
-            background: #ef4444;
-            color: white;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-        }
-        
-        /* 聊天窗口 */
-        .chat-window {
-            position: fixed;
-            bottom: 20px;
-            right: 380px;
-            width: 350px;
-            height: 450px;
-            background: var(--bg-secondary);
-            border-radius: 15px;
-            box-shadow: 0 5px 25px var(--shadow);
-            z-index: 103;
-            display: none;
-            flex-direction: column;
-            border: 1px solid var(--border);
-        }
-        
-        .chat-window.active {
-            display: flex;
-            animation: slideUp 0.3s ease;
-        }
-        
-        .chat-header {
+        .article-comment-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            background: var(--accent);
-            color: white;
-            border-radius: 15px 15px 0 0;
+            margin-bottom: 8px;
         }
         
-        .chat-title {
+        .article-comment-author {
             font-weight: bold;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .chat-close {
-            background: none;
-            border: none;
-            color: white;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-        
-        .chat-messages {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            background: var(--bg-primary);
-        }
-        
-        .message {
-            margin-bottom: 15px;
-            max-width: 80%;
-        }
-        
-        .message.sent {
-            margin-left: auto;
-        }
-        
-        .message.received {
-            margin-right: auto;
-        }
-        
-        .message-content {
-            padding: 10px 15px;
-            border-radius: 15px;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-        
-        .message.sent .message-content {
-            background: var(--accent);
-            color: white;
-            border-radius: 15px 15px 0 15px;
-        }
-        
-        .message.received .message-content {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-            border-radius: 15px 15px 15px 0;
-        }
-        
-        .message-time {
-            font-size: 0.7rem;
+        .article-comment-time {
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            margin-top: 5px;
-            text-align: right;
         }
         
-        .chat-input-area {
-            display: flex;
-            gap: 10px;
-            padding: 15px;
-            border-top: 1px solid var(--border);
+        .article-comment-content {
+            color: var(--text-primary);
+            line-height: 1.6;
         }
         
-        .chat-input {
-            flex: 1;
+        /* 回到文章列表按钮 */
+        .back-to-list-btn {
             background: var(--bg-primary);
             border: 2px solid var(--border);
-            border-radius: 20px;
-            padding: 10px 15px;
             color: var(--text-primary);
-            font-size: 0.95rem;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
         }
         
-        .chat-input:focus {
-            outline: none;
+        .back-to-list-btn:hover {
+            background: var(--accent);
+            color: white;
             border-color: var(--accent);
         }
         
-        .send-btn {
+        /* 创建新文章按钮 */
+        .create-article-btn {
             background: var(--accent);
             color: white;
             border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        
+        .create-article-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        
+        /* 创建文章弹窗 */
+        .create-article-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .create-article-modal.active {
+            display: flex;
+        }
+        
+        .create-article-content {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .create-article-title-input {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .create-article-content-input {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            min-height: 200px;
+            resize: vertical;
+            margin-bottom: 15px;
+        }
+        
+        .create-article-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .create-article-cancel {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+            padding: 10px 20px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        .send-btn:hover {
-            background: var(--accent-hover);
-            transform: scale(1.1);
+        .create-article-submit {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
         
         /* 新闻区域 */
@@ -1004,16 +1041,32 @@
             font-size: 1.3rem;
         }
         
+        /* 丰富学习资源 - 分类 */
+        .resource-category {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .resource-category-title {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
         .resource-list {
-            list-style: none;
-            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 10px;
         }
         
         .resource-item {
             background: var(--bg-primary);
-            padding: 15px 20px;
-            margin: 10px 0;
-            border-radius: 10px;
+            padding: 12px 15px;
+            border-radius: 8px;
             border-left: 4px solid var(--accent);
             transition: all 0.3s ease;
         }
@@ -1023,15 +1076,20 @@
             box-shadow: 0 3px 10px var(--shadow);
         }
         
-        .resource-title {
+        .resource-title a {
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .resource-title a:hover {
+            color: var(--accent);
         }
         
         .resource-desc {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
         
         .timeline {
@@ -1630,6 +1688,11 @@
             to { opacity: 1; transform: translateX(0); }
         }
         
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -1639,10 +1702,16 @@
                 grid-template-columns: 1fr;
             }
             
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .resource-list {
+                grid-template-columns: 1fr;
             }
             
             .profile-stats {
@@ -1653,10 +1722,25 @@
                 font-size: 0.9rem;
             }
             
-            .chat-window {
-                width: 90%;
-                right: 5%;
-                bottom: 20px;
+            .nav-menu {
+                gap: 2px;
+            }
+            
+            .nav-link {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .navbar-container {
+                padding: 0 10px;
+            }
+            
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            
+            .article-detail-title {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -1667,10 +1751,26 @@
     
     <div class="toast" id="toast"></div>
     
+    <!-- 创建文章弹窗 -->
+    <div class="create-article-modal" id="create-article-modal" onclick="closeCreateArticleModal(event)">
+        <div class="create-article-content">
+            <div class="modal-header">
+                <div class="modal-title">发布新文章</div>
+                <button class="modal-close" onclick="closeCreateArticleModal(null)">×</button>
+            </div>
+            <input type="text" class="create-article-title-input" id="new-article-title" placeholder="文章标题">
+            <textarea class="create-article-content-input" id="new-article-content" placeholder="文章内容..."></textarea>
+            <div class="create-article-buttons">
+                <button class="create-article-cancel" onclick="closeCreateArticleModal(null)">取消</button>
+                <button class="create-article-submit" onclick="publishArticle()">发布</button>
+            </div>
+        </div>
+    </div>
+    
     <!-- 顶部导航栏 -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="#" class="navbar-brand">
+            <a href="#" class="navbar-brand" onclick="scrollToSection('hero')">
                 🤖 阿杰的AI探索站
             </a>
             <ul class="nav-menu">
@@ -1679,6 +1779,9 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="scrollToSection('news')">新闻</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="scrollToSection('articles')">文章社区</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link" onclick="scrollToSection('modules')">AI模块</a>
@@ -1690,6 +1793,11 @@
                     <div class="user-avatar-nav" id="nav-avatar" onclick="openModal('profile')">
                         <span id="nav-avatar-text">👤</span>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="toggleTheme()" style="border: none; background: none; width: auto;">
+                        <span id="theme-icon-nav">🌙</span>
+                    </button>
                 </li>
             </ul>
         </div>
@@ -1709,9 +1817,9 @@
         <div class="sidebar-section">
             <h3 class="sidebar-title">📢 弹幕控制</h3>
             <div class="danmaku-control">
-                <span>弹幕开关：</span>
+                <span>启用弹幕：</span>
                 <label class="switch">
-                    <input type="checkbox" id="danmaku-switch" checked>
+                    <input type="checkbox" id="danmaku-switch" checked onchange="toggleDanmaku()">
                     <span class="slider"></span>
                 </label>
             </div>
@@ -1727,102 +1835,21 @@
         </div>
         
         <div class="sidebar-section">
-            <h3 class="sidebar-title">📄 个人文章</h3>
-            <div class="article-form">
-                <input type="text" class="article-input" id="article-title" placeholder="文章标题">
-                <textarea class="article-textarea" id="article-content" placeholder="文章内容..."></textarea>
-                <button class="submit-article-btn" onclick="addArticle()">发布文章</button>
+            <h3 class="sidebar-title">🏠 文章社区</h3>
+            <div class="community-shortcut">
+                <div class="community-item" onclick="scrollToSection('articles'); closeSidebarOnMobile()">
+                    <div class="community-title">进入文章社区</div>
+                    <div class="community-count" id="community-count">共 <strong>0</strong> 篇文章</div>
+                </div>
+                <div class="community-item" onclick="openCreateArticleModal(); closeSidebarOnMobile()">
+                    <div class="community-title">发布新文章</div>
+                    <div class="community-count">分享你的想法</div>
+                </div>
             </div>
-            <ul class="article-list" id="article-list"></ul>
-        </div>
-        
-        <div class="sidebar-section">
-            <h3 class="sidebar-title">💬 私聊系统</h3>
-            <ul class="chat-users" id="chat-users">
-                <li class="chat-user" data-user-id="1" onclick="openChat(1)">
-                    <div class="chat-user-avatar">AI</div>
-                    <div class="chat-user-info">
-                        <div class="chat-user-name">AI助手</div>
-                        <div class="chat-user-status">在线</div>
-                    </div>
-                </li>
-                <li class="chat-user" data-user-id="2" onclick="openChat(2)">
-                    <div class="chat-user-avatar">张</div>
-                    <div class="chat-user-info">
-                        <div class="chat-user-name">张三</div>
-                        <div class="chat-user-status">5分钟前在线</div>
-                    </div>
-                </li>
-                <li class="chat-user" data-user-id="3" onclick="openChat(3)">
-                    <div class="chat-user-avatar">李</div>
-                    <div class="chat-user-info">
-                        <div class="chat-user-name">李四</div>
-                        <div class="chat-user-status">刚刚在线</div>
-                    </div>
-                    <div class="unread-badge">2</div>
-                </li>
-                <li class="chat-user" data-user-id="4" onclick="openChat(4)">
-                    <div class="chat-user-avatar">王</div>
-                    <div class="chat-user-info">
-                        <div class="chat-user-name">王五</div>
-                        <div class="chat-user-status">离线</div>
-                    </div>
-                </li>
-            </ul>
         </div>
     </div>
     
     <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">📌</button>
-    
-    <!-- 聊天窗口 -->
-    <div class="chat-window" id="chat-window">
-        <div class="chat-header">
-            <div class="chat-title">
-                <span id="chat-target-avatar">👤</span>
-                <span id="chat-target-name">聊天对象</span>
-            </div>
-            <button class="chat-close" onclick="closeChat()">×</button>
-        </div>
-        <div class="chat-messages" id="chat-messages"></div>
-        <div class="chat-input-area">
-            <input type="text" class="chat-input" id="chat-input" placeholder="输入消息...">
-            <button class="send-btn" onclick="sendMessage()">➤</button>
-        </div>
-    </div>
-    
-    <!-- 弹窗（登录/注册/个人中心） -->
-    <div class="modal-overlay" id="login-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">登录 / 注册</h2>
-                <button class="modal-close" onclick="closeModal('login')">×</button>
-            </div>
-            <div class="form-group">
-                <label class="form-label">用户名</label>
-                <input type="text" class="form-input" id="login-username" placeholder="输入用户名">
-            </div>
-            <div class="form-group">
-                <label class="form-label">密码</label>
-                <input type="password" class="form-input" id="login-password" placeholder="输入密码">
-            </div>
-            <div class="form-buttons">
-                <button class="form-btn" onclick="login()">登录</button>
-                <button class="form-btn secondary" onclick="register()">注册</button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal-overlay" id="profile-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">个人中心</h2>
-                <button class="modal-close" onclick="closeModal('profile')">×</button>
-            </div>
-            <div id="profile-content">
-                <!-- 个人中心内容会动态加载 -->
-            </div>
-        </div>
-    </div>
     
     <!-- 主内容区 -->
     <div class="container">
@@ -1841,6 +1868,37 @@
             </div>
         </div>
         
+        <!-- 文章社区 -->
+        <div class="articles-section" id="articles">
+            <h2 class="section-title">🏠 用户文章社区</h2>
+            <button class="create-article-btn" onclick="openCreateArticleModal()">➕ 发布新文章</button>
+            <div class="articles-grid" id="articles-grid">
+                <!-- 文章卡片会动态加载 -->
+            </div>
+        </div>
+        
+        <!-- 文章详情 -->
+        <div class="article-detail" id="article-detail">
+            <button class="back-to-list-btn" onclick="backToArticles()">← 返回文章列表</button>
+            <div class="article-detail-header">
+                <h1 class="article-detail-title" id="view-article-title"></h1>
+                <div class="article-detail-meta">
+                    <span>作者：<span id="view-article-author"></span></span>
+                    <span>发布时间：<span id="view-article-time"></span></span>
+                </div>
+            </div>
+            <div class="article-detail-content" id="view-article-content"></div>
+            <div class="article-comments" id="article-comments">
+                <h3 class="article-comments-title">💬 评论区</h3>
+                <div class="article-comment-form">
+                    <textarea class="article-comment-input" id="article-comment-input" placeholder="写下你的评论..."></textarea>
+                    <button class="article-comment-submit" onclick="submitArticleComment()">发表评论</button>
+                </div>
+                <ul class="article-comment-list" id="article-comment-list"></ul>
+            </div>
+        </div>
+        
+        <!-- AI模块 -->
         <div class="modules" id="modules">
             <div class="module-card" data-module="history" onclick="showDetails('history')">
                 <div class="module-icon">📜</div>
@@ -1904,9 +1962,7 @@
         </div>
         
         <!-- 模块详情区域 -->
-        <div id="module-details-container">
-            <!-- 模块详情会动态加载 -->
-        </div>
+        <div id="module-details-container"></div>
         
         <footer class="footer">
             <p>© 2024 阿杰的AI探索站 | 持续更新中...</p>
@@ -1919,47 +1975,247 @@
         </footer>
     </div>
     
+    <!-- 弹窗（登录/注册/个人中心） -->
+    <div class="modal-overlay" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">登录 / 注册</h2>
+                <button class="modal-close" onclick="closeModal('login')">×</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">用户名</label>
+                <input type="text" class="form-input" id="login-username" placeholder="输入用户名">
+            </div>
+            <div class="form-group">
+                <label class="form-label">密码</label>
+                <input type="password" class="form-input" id="login-password" placeholder="输入密码">
+            </div>
+            <div class="form-buttons">
+                <button class="form-btn" onclick="login()">登录</button>
+                <button class="form-btn secondary" onclick="register()">注册</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal-overlay" id="profile-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">个人中心</h2>
+                <button class="modal-close" onclick="closeModal('profile')">×</button>
+            </div>
+            <div id="profile-content">
+                <!-- 个人中心内容会动态加载 -->
+            </div>
+        </div>
+    </div>
+    
     <script>
-        // 基础数据
+        // ==================== 全局变量 ====================
         let currentUser = null;
-        let currentChatUser = null;
+        let currentArticleId = null;
         let danmakuEnabled = true;
         let todos = [];
         let articles = [];
-        let chatMessages = {};
+        let danmakuInterval = null;
         
-        // 模拟新闻数据
-        const newsData = [
-            { date: "2024-04-15", title: "GPT-5技术细节曝光，推理能力大幅提升", desc: "据内部消息，GPT-5在逻辑推理和数学能力上取得突破性进展，预计年底发布。" },
-            { date: "2024-04-14", title: "谷歌发布Gemini 2.0，多模态能力再升级", desc: "谷歌最新AI模型在图像理解和视频分析方面表现优异，超越GPT-4V。" },
-            { date: "2024-04-13", title: "AI Agent自主完成复杂任务，接近人类水平", desc: "研究人员开发出能够独立规划、执行复杂任务的AI Agent系统。" },
-            { date: "2024-04-12", title: "中国大模型公司获得10亿美元融资", desc: "国内AI创业公司完成新一轮融资，将用于大模型研发和商业化。" },
-            { date: "2024-04-11", title: "AI在医疗诊断领域取得重大突破", desc: "深度学习模型在癌症早期诊断中准确率达到98%，超越人类专家。" },
-            { date: "2024-04-10", title: "AI绘画工具Midjourney V7发布", desc: "最新版本在图像质量和创意控制方面都有显著提升。" }
+        // ==================== 学习资源数据 - 丰富到100+ ====================
+        
+        // 机器学习学习资源 - 30+
+        const mlResources = [
+            { category: "📚 经典课程", resources: [
+                { name: "吴恩达《机器学习》(Coursera)", url: "https://www.coursera.org/learn/machine-learning", desc: "AI领域最经典的入门课程" },
+                { name: "斯坦福 CS229 机器学习", url: "https://see.stanford.edu/Course/CS229", desc: "斯坦福大学官方公开课" },
+                { name: "李航《统计学习方法》", url: "https://book.douban.com/subject/10590856/", desc: "国内机器学习经典教材" },
+                { name: "Introduction to Statistical Learning", url: "https://www.statlearning.com/", desc: "英文经典教材，有免费PDF" },
+                { name: "DeepLearning.AI 专项课程", url: "https://www.deeplearning.ai/courses/", desc: "吴恩达出品的系统性课程" },
+                { name: "机器学习速成课 (Google)", url: "https://developers.google.com/machine-learning/crash-course", desc: "Google官方出品的速成课程" },
+                { name: "Kaggle 机器学习教程", url: "https://www.kaggle.com/learn", desc: "实战导向的机器学习学习平台" },
+                { name: "伯克利 CS189 机器学习", url: "https://people.eecs.berkeley.edu/~jordan/courses/fa20-289/", desc: "伯克利大学机器学习课程" },
+                { name: "Udacity 机器学习纳米学位", url: "https://www.udacity.com/course/machine-learning-engineer-nanodegree--nd009t", desc: "企业级机器学习工程师课程" }
+            ]},
+            { category: "🛠️ 工具与框架", resources: [
+                { name: "Scikit-learn 官方文档", url: "https://scikit-learn.org/stable/documentation.html", desc: "Python机器学习库权威文档" },
+                { name: "Pandas 文档", url: "https://pandas.pydata.org/docs/", desc: "数据分析必备工具" },
+                { name: "NumPy 文档", url: "https://numpy.org/doc/", desc: "数值计算基础库" },
+                { name: "XGBoost 文档", url: "https://xgboost.readthedocs.io/", desc: "梯度提升树经典库" },
+                { name: "LightGBM 文档", url: "https://lightgbm.readthedocs.io/", desc: "轻量级梯度提升树" },
+                { name: "CatBoost 文档", url: "https://catboost.ai/docs/", desc: "Yandex出品的梯度提升库" },
+                { name: "MLflow 文档", url: "https://mlflow.org/docs/latest/index.html", desc: "机器学习生命周期管理" },
+                { name: "Optuna 文档", url: "https://optuna.readthedocs.io/", desc: "超参数优化框架" },
+                { name: "Hyperopt 文档", url: "https://hyperopt.github.io/hyperopt/", desc: "贝叶斯优化工具" },
+                { name: "Dask 文档", url: "https://docs.dask.org/", desc: "并行计算框架，扩展Pandas" },
+                { name: "Imbalanced-learn", url: "https://imbalanced-learn.org/", desc: "处理不平衡数据" },
+                { name: "SHAP 文档", url: "https://shap.readthedocs.io/", desc: "模型解释工具" },
+                { name: "LIME 文档", url: "https://github.com/marcotcr/lime", desc: "局部可解释模型无关解释" },
+                { name: "Yellowbrick", url: "https://www.scikit-yb.org/", desc: "机器学习可视化" },
+                { name: "Alibi Detect", url: "https://docs.seldon.io/projects/alibi-detect/en/latest/", desc: "异常检测库" },
+                { name: "Fairlearn", url: "https://fairlearn.org/", desc: "模型公平性评估" }
+            ]},
+            { category: "📝 博客与教程", resources: [
+                { name: "Machine Learning Mastery", url: "https://machinelearningmastery.com/", desc: "通俗易懂的机器学习教程" },
+                { name: "Towards Data Science", url: "https://towardsdatascience.com/", desc: "Medium上最受欢迎的数据科学博客" },
+                { name: "KDnuggets", url: "https://www.kdnuggets.com/", desc: "数据科学新闻和教程" },
+                { name: "Analytics Vidhya", url: "https://www.analyticsvidhya.com/blog/", desc: "印度知名数据科学博客" },
+                { name: "Machine Learning Weekly", url: "https://machinelearningweekly.com/", desc: "机器学习周刊" },
+                { name: "Lil's Log", url: "https://lilianweng.github.io/", desc: "优秀AI技术博客" },
+                { name: "Colah's Blog", url: "https://colah.github.io/", desc: "深入浅出解释神经网络" },
+                { name: "蒋焜的博客", url: "https://jiangkun.blog/", desc: "国内优秀AI博主" },
+                { name: "知乎机器学习话题", url: "https://www.zhihu.com/topic/105550197", desc: "知乎机器学习话题" },
+                { name: "GitHub Awesome ML", url: "https://github.com/josephmisiti/awesome-machine-learning", desc: "机器学习资源大汇总" },
+                { name: "Papers with Code", url: "https://paperswithcode.com/", desc: "论文代码对照表" }
+            ]},
+            { name: "📖 书籍推荐", resources: [
+                { name: "《统计学习方法》- 李航", url: "https://book.douban.com/subject/10590856/", desc: "中文机器学习经典教材" },
+                { name: "《机器学习实战》- Peter Harrington", url: "https://book.douban.com/subject/10590800/", desc: "实战导向，代码丰富" },
+                { name: "《Python机器学习基础教程》- Müller", url: "https://book.douban.com/subject/26381342/", desc: "入门友好，适合Python开发者" },
+                { name: "《模式识别与机器学习》- Bishop", url: "https://book.douban.com/subject/1980044/", desc: "经典教材，理论扎实" },
+                { name: "《机器学习》- Tom Mitchell", url: "https://book.douban.com/subject/129590/", desc: "AI经典教材" },
+                { name: "《Hands-On Machine Learning》- Géron", url: "https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/", desc: "最受欢迎的实战书籍" }
+            ]}
         ];
         
-        // 模拟聊天用户
-        const chatUsers = [
-            { id: 1, name: "AI助手", avatar: "AI", status: "在线" },
-            { id: 2, name: "张三", avatar: "张", status: "5分钟前在线" },
-            { id: 3, name: "李四", avatar: "李", status: "刚刚在线" },
-            { id: 4, name: "王五", avatar: "王", status: "离线" }
+        // 深度学习学习资源 - 30+
+        const dlResources = [
+            { category: "🎓 经典课程", resources: [
+                { name: "吴恩达《深度学习》", url: "https://www.coursera.org/specializations/deep-learning", desc: "DeepLearning.AI出品，最受欢迎的入门课程" },
+                { name: "斯坦福 CS231n 卷积神经网络", url: "https://cs231n.github.io/", desc: "计算机视觉与深度学习经典课程" },
+                { name: "斯坦福 CS224n 自然语言处理", url: "https://web.stanford.edu/class/cs224n/", desc: "深度学习NLP经典课程" },
+                { name: "斯坦福 CS230 深度学习", url: "https://cs230.stanford.edu/", desc: "深度学习入门课程" },
+                { name: "Deep Learning Book 课程", url: "https://www.deeplearningbook.org/", desc: "《深度学习》花书配套课程" },
+                { name: "Fast.ai 深度学习", url: "https://course.fast.ai/", desc: "自顶向下的实战教学方法" },
+                { name: "MIT 6.S191 深度学习", url: "http://introtodeeplearning.com/", desc: "MIT深度学习入门课程" },
+                { name: "牛津 Deep Learning", url: "https://www.cs.ox.ac.uk/people/nando.defreitas/machinelearning/", desc: "牛津大学深度学习课程" },
+                { name: "PyTorch 官方教程", url: "https://pytorch.org/tutorials/", desc: "PyTorch官方入门教程" },
+                { name: "TensorFlow 教程", url: "https://www.tensorflow.org/tutorials", desc: "TensorFlow官方教程" }
+            ]},
+            { category: "🏗️ 主流框架", resources: [
+                { name: "PyTorch 官网", url: "https://pytorch.org/", desc: "最受欢迎的动态框架" },
+                { name: "TensorFlow 官网", url: "https://www.tensorflow.org/", desc: "Google出品的工业级框架" },
+                { name: "Keras 官网", url: "https://keras.io/", desc: "高级API，快速上手" },
+                { name: "JAX 官网", url: "https://github.com/google/jax", desc: "Autograd + XLA组合" },
+                { name: "MXNet 官网", url: "https://mxnet.apache.org/", desc: "Apache出品深度学习框架" },
+                { name: "PaddlePaddle", url: "https://www.paddlepaddle.org.cn/", desc: "百度出品，国产深度学习框架" },
+                { name: "MindSpore", url: "https://www.mindspore.cn/", desc: "华为出品，全场景AI框架" },
+                { name: "TensorRT", url: "https://developer.nvidia.com/tensorrt", desc: "NVIDIA推理优化器" },
+                { name: "ONNX", url: "https://onnx.ai/", desc: "开放神经网络交换格式" },
+                { name: "TorchVision", url: "https://pytorch.org/vision/stable/index.html", desc: "PyTorch计算机视觉工具库" },
+                { name: "Hugging Face Transformers", url: "https://huggingface.co/docs/transformers/", desc: "Transformer模型库" },
+                { name: "Detectron2", url: "https://detectron2.readthedocs.io/", desc: "Facebook目标检测框架" },
+                { name: "MMDetection", url: "https://mmdetection.readthedocs.io/", desc: "OpenMMLab目标检测工具箱" },
+                { name: "PyTorch Lightning", url: "https://www.pytorchlightning.ai/", desc: "简化PyTorch训练代码" },
+                { name: "Weights & Biases", url: "https://wandb.ai/", desc: "实验跟踪和可视化工具" },
+                { name: "Weights & Biases", url: "https://wandb.ai/", desc: "实验跟踪和可视化工具" },
+                { name: "Grad-CAM", url: "https://github.com/jacobgil/pytorch-grad-cam", desc: "CNN可视化工具" }
+            ]},
+            { category: "📖 经典书籍", resources: [
+                { name: "《深度学习》- Ian Goodfellow", url: "https://www.deeplearningbook.org/", desc: "深度学习圣经，免费在线阅读" },
+                { name: "《神经网络与深度学习》- Michael Nielsen", url: "http://neuralnetworksanddeeplearning.com/", desc: "免费在线书籍，通俗易懂" },
+                { name: "《动手学深度学习》", url: "https://zh.d2l.ai/", desc: "李沐主编，免费在线，多框架实现" },
+                { name: "《深度学习入门》- 斋藤康毅", url: "https://book.douban.com/subject/26712938/", desc: "Python从零实现神经网络" },
+                { name: "《神经网络设计》- 海曼", url: "https://book.douban.com/subject/1203388/", desc: "神经网络设计经典教材" },
+                { name: "《卷积神经网络》- 邱锡鹏", url: "https://book.douban.com/subject/30338840/", desc: "国内CNN教材" },
+                { name: "《Pattern Recognition and Machine Learning》", url: "https://www.springer.com/gp/book/9780387310732", desc: "Bishop经典教材" }
+            ]},
+            { category: "🔬 研究方向", resources: [
+                { name: "计算机视觉路线图", url: "https://github.com/youyuliao/Computer-Vision-Roadmap", desc: "计算机CV学习路线图" },
+                { name: "arxiv-sanity", url: "http://www.arxiv-sanity.com/", desc: "arXiv论文搜索工具" },
+                { name: "Papers with Code", url: "https://paperswithcode.com/", desc: "论文代码配对" },
+                { name: "Google Research Blog", url: "https://ai.googleblog.com/", desc: "Google AI研究博客" },
+                { name: "OpenAI Blog", url: "https://openai.com/blog", desc: "OpenAI官方博客" },
+                { name: "DeepMind Blog", url: "https://deepmind.google/discover/blog/", desc: "DeepMind官方博客" },
+                { name: "Facebook AI Research", url: "https://ai.facebook.com/blog/", desc: "FAIR官方博客" },
+                { name: "中国人工智能学会", url: "http://www.caai.cn/", desc: "中国人工智能学会官网" },
+                { name: "arXiv AI", url: "https://arxiv.org/list/cs.AI/recent", desc: "arXiv AI最新论文" },
+                { name: "Semantic Scholar", url: "https://www.semanticscholar.org/", desc: "AI驱动学术搜索" }
+            ]}
         ];
         
-        // 模拟聊天消息
-        const initialMessages = {
-            1: [
-                { sender: "AI助手", content: "你好！我是AI助手，有什么可以帮助您的吗？", time: "10:30", sent: false },
-                { sender: "我", content: "我想了解一些关于机器学习的基础知识", time: "10:32", sent: true },
-                { sender: "AI助手", content: "机器学习是AI的核心领域，主要分为监督学习、无监督学习和强化学习。", time: "10:33", sent: false }
-            ],
-            3: [
-                { sender: "李四", content: "你好！你的网站做得真不错！", time: "昨天 15:20", sent: false },
-                { sender: "李四", content: "特别是那个弹幕效果，很有创意", time: "昨天 15:21", sent: false }
-            ]
-        };
+        // 大语言模型学习资源 - 25+
+        const llmResources = [
+            { category: "📚 入门学习", resources: [
+                { name: "《Attention Is All You Need》论文", url: "https://arxiv.org/abs/1706.03762", desc: "Transformer原始论文" },
+                { name: "Transformer 讲解", url: "https://jalammar.github.io/illustrated-transformer/", desc: "图解Transformer，通俗易懂" },
+                { name: "GPT架构讲解", url: "https://jalammar.github.io/illustrated-gpt2/", desc: "图解GPT-2架构" },
+                { name: "斯坦福 CS324 大语言模型", url: "https://web.stanford.edu/class/cs324/", desc: "斯坦福大语言模型课程" },
+                { name: "Hugging Face 课程", url: "https://huggingface.co/learn", desc: "Hugging Face官方免费课程" },
+                { name: "DeepLearning.AI LLM 课程", url: "https://www.deeplearning.ai/courses/build-large-language-models-from-scratch/", desc: "从头构建大语言模型课程" },
+                { name: "CMU CS 11-737 LLM", url: "https://cmu-lnps-11737.github.io/", desc: "CMU大语言模型课程" }
+            ]},
+            { category: "🛠️ 工具与库", resources: [
+                { name: "Hugging Face Transformers", url: "https://huggingface.co/docs/transformers/", desc: "Transformer模型Python库" },
+                { name: "Hugging Face Hub", url: "https://huggingface.co/models", desc: "预训练模型仓库" },
+                { name: "LangChain", url: "https://python.langchain.com/", desc: "构建LLM应用框架" },
+                { name: "Llama.cpp", url: "https://github.com/ggerganov/llama.cpp", desc: "端侧运行Llama" },
+                { name: "Text Generation Inference", url: "https://github.com/huggingface/text-generation-inference", desc: "服务端部署LLM" },
+                { name: "vLLM", url: "https://github.com/vllm-project/vllm", desc: "高吞吐量LLM推理" },
+                { name: "Ollama", url: "https://ollama.com/", desc: "本地轻松运行大模型" },
+                { name: "LangChain Chinese", url: "https://github.com/chatchat-space/Langchain-Chatchat", desc: "LangChain Chat中文项目" },
+                { name: "OpenLLaMA", url: "https://github.com/openlm-research/open_llama", desc: "开源可商用Llama" },
+                { name: "GPTQ-for-LLaMa", url: "https://github.com/oobabooga/GPTQ-for-LLaMa", desc: "LLaMA量化" },
+                { name: "text-generation-webui", url: "https://github.com/oobabooga/text-generation-webui", desc: "LLM网页UI" },
+                { name: "peft", url: "https://github.com/huggingface/peft", desc: "参数高效微调库" },
+                { name: "bitsandbytes", url: "https://github.com/TimDettmers/bitsandbytes", desc: "8位量化库" },
+                { name: "transformers.js", url: "https://huggingface.co/docs/transformers.js/index.html", desc: "浏览器运行LLM" },
+                { name: "llamafile", url: "https://github.com/Mozilla-Ocho/llamafile", desc: "单文件运行Llama 2" }
+            ]},
+            { category: "📝 学习博客", resources: [
+                { name: "Transformer 论文笔记", url: "https://lilianweng.github.io/posts/2018-06-24-attention/", desc: "Lilian Weng的Attention讲解" },
+                { name: "LLM 推理技术", url: "https://lilianweng.github.io/posts/2023-05-27-diffusion/", desc: "Lilian Weng讲解LLM推理" },
+                { name: "大语言模型综述", url: "https://cameronrwolfe.substack.com/p/a-survey-of-large-language-models", desc: "大语言模型综述" },
+                { name: "大语言模型动物园", url: "https://cameronrwolfe.substack.com/p/the-large-language-model-zoo", desc: "各种LLM模型介绍" },
+                { name: "GitHub Awesome LLM", url: "https://github.com/Hannibal046/Awesome-LLM", desc: "大语言模型资源汇总" },
+                { name: "GitHub Chinese LLM", url: "https://github.com/facebookresearch/llama", desc: "Facebook LLaMA官方仓库" },
+                { name: "Awesome LLM Papers", url: "https://github.com/elvis/awesome-llm-papers", desc: "必读LLM论文汇总" },
+                { name: "OpenAI GPT 博客", url: "https://openai.com/blog/topics/gpt/", desc: "OpenAI官方GPT博客" },
+                { name: "Anthropic Blog", url: "https://www.anthropic.com/index", desc: "Anthropic官方博客" },
+                { name: "Yoshua Bengio Blog", url: "https://yoshuabengio.org/", desc: "深度学习泰斗博客" }
+            ]},
+            { category: "📖 开源模型", resources: [
+                { name: "Llama 2 (Meta)", url: "https://ai.meta.com/llama/", desc: "Meta开源可商用LLaMA 2" },
+                { name: "Mistral 7B", url: "https://mistral.ai/news/announcing-mistral-7b/", desc: "高质量小参数模型" },
+                { name: "Zephyr-7B", url: "https://huggingface.co/HuggingFaceH4/zephyr-7b-beta", desc: "对齐良好的7B模型" },
+                { name: "Qwen 通义千问", url: "https://github.com/QwenLM/Qwen", desc: "阿里通义千问开源" },
+                { name: "InternLM 书生浦语", url: "https://github.com/InternLM/InternLM", desc: "上海AI实验室开源" },
+                { name: "ChatGLM", url: "https://github.com/THUDM/ChatGLM3", desc: "智源悟道开源聊天模型" },
+                { name: "Baichuan 百川", url: "https://github.com/baichuan-inc/Baichuan-7B", desc: "百川智能开源" },
+                { name: "Yi 零一万物", url: "https://huggingface.co/01-ai/Yi-6B", desc: "零一万物开源模型" }
+            ]}
+        ];
         
-        // 初始化函数
+        // AI Agent学习资源 - 15+
+        const agentResources = [
+            { category: "📚 入门学习", resources: [
+                { name: "《Artificial Intelligence: A Modern Approach》", url: "http://aima.cs.berkeley.edu/", desc: "AI经典教材" },
+                { name: "Agent 综述", url: "https://lilianweng.github.io/posts/2023-06-23-reactive-agent/", desc: "Lilian Weng讲解ReAct Agent" },
+                { name: "AutoGPT 论文", url: "https://arxiv.org/abs/2303.09014", desc: "AutoGPT原始论文" },
+                { name: "BabyAGI", url: "https://github.com/yoheinakajima/babyagi", desc: "任务驱动自主Agent" },
+                { name: "MIT 6.034 AI", url: "https://ocw.mit.edu/courses/6-034-artificial-intelligence-fall-2010/", desc: "MIT人工智能公开课" }
+            ]},
+            { category: "🛠️ 框架与工具", resources: [
+                { name: "LangChain Agents", url: "https://python.langchain.com/docs/modules/agents/", desc: "LangChain Agent文档" },
+                { name: "AutoGPT", url: "https://github.com/Significant-Gravitas/AutoGPT", desc: "著名自主Agent项目" },
+                { name: "GPT Engineer", url: "https://github.com/gpt-engineer-org/gpt-engineer", desc: "AI编码Agent" },
+                { name: "MetaGPT", url: "https://github.com/geekan/MetaGPT", desc: "多AI协作软件开发" },
+                { name: "CAMEL", url: "https://github.com/lightaime/camel", desc: "角色扮演AI交流" },
+                { name: "AgentBench", url: "https://github.com/facebookresearch/AgentBench", desc: "Agent基准测试" },
+                { name: "ReAct Paper", url: "https://arxiv.org/abs/2210.03629", desc: "ReAct: Synergizing Reasoning and Acting in LLM" },
+                { name: "Semantic Kernel", url: "https://github.com/microsoft/semantic-kernel", desc: "微软Agent框架" },
+                { name: "crewAI", url: "https://github.com/joaomdmoura/crewAI", desc: "多Agent协作框架" },
+                { name: "AutoGen", url: "https://github.com/microsoft/autogen", desc: "微软多Agent框架" },
+                { name: "LangGraph", url: "https://github.com/langchain-ai/langgraph", desc: "LangChain构建图状Agent" },
+                { name: "GPTool", url: "https://github.com/stevenschmatz/gptool", desc: "LLM调用工具" },
+                { name: "ToolBench", url: "https://github.com/OpenBMB/ToolBench", desc: "工具使用 benchmark" }
+            ]},
+            { category: "📝 博客与教程", resources: [
+                { name: "AI Agent 入门指南", url: "https://www.promptingguide.ai/guide/agents", desc: "Prompting Guide AI Agent指南" },
+                { name: "Agent 发展历程", url: "https://www.forbes.com/sites/robtoews/2023/08/12/the-rise-of-ai-agents/", desc: "Forbes介绍AI Agent发展" },
+                { name: "GitHub Awesome AI Agents", url: "https://github.com/eightBEC/awesome-ai-agents", desc: "AI Agent资源汇总" },
+                { name: "LessWrong AI Agents", url: "https://www.lesswrong.com/tag/ai-agents", desc: "LessWrong讨论AI Agents" },
+                { name: "OpenAI DevDay Agents", url: "https://openai.com/blog/introducing-gpts/", desc: "OpenAI GPTs介绍" }
+            ]}
+        ];
+        
+        // ==================== 初始化函数 ====================
         function init() {
             // 初始化主题
             const savedTheme = localStorage.getItem('theme');
@@ -1967,6 +2223,24 @@
             
             if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
                 document.body.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-icon-nav').textContent = '☀️';
+            } else {
+                document.getElementById('theme-icon-nav').textContent = '🌙';
+            }
+            
+            // 初始化弹幕开关状态
+            const savedDanmaku = localStorage.getItem('danmakuEnabled');
+            if (savedDanmaku !== null) {
+                danmakuEnabled = savedDanmaku === 'true';
+                document.getElementById('danmaku-switch').checked = danmakuEnabled;
+            }
+            
+            // 初始化弹幕 - 真正控制开关
+            if (danmakuEnabled) {
+                startDanmaku();
+            } else {
+                stopDanmaku();
+                document.getElementById('danmaku-switch').checked = false;
             }
             
             // 初始化访客计数
@@ -1987,22 +2261,96 @@
             // 加载文章
             loadArticles();
             
-            // 加载聊天消息
-            loadChatMessages();
+            // 更新社区文章计数
+            updateCommunityCount();
             
             // 初始化粒子背景
             initParticles();
-            
-            // 初始化弹幕
-            if (danmakuEnabled) {
-                startDanmaku();
-            }
             
             // 检查用户登录状态
             checkLoginStatus();
         }
         
-        // 加载新闻
+        // ==================== 弹幕控制 - 真正实现开关 ====================
+        function toggleDanmaku() {
+            danmakuEnabled = document.getElementById('danmaku-switch').checked;
+            localStorage.setItem('danmakuEnabled', danmakuEnabled);
+            
+            if (danmakuEnabled) {
+                startDanmaku();
+                showToast('弹幕已开启');
+            } else {
+                stopDanmaku();
+                showToast('弹幕已关闭');
+            }
+        }
+        
+        function startDanmaku() {
+            if (danmakuInterval) {
+                clearInterval(danmakuInterval);
+            }
+            
+            const messages = [
+                "欢迎来到阿杰的AI探索站！",
+                "机器学习真有趣！",
+                "深度学习改变世界",
+                "GPT-4太强大了",
+                "AI Agent是未来趋势",
+                "一起学习人工智能",
+                "这里的内容很棒！",
+                "弹幕效果很酷吧？",
+                "欢迎来文章社区发帖",
+                "大家一起交流学习",
+                "Transfomer架构yyds",
+                "大模型改变未来",
+                "你注册账号了吗？"
+            ];
+            
+            // 清除现有弹幕
+            const container = document.getElementById('danmaku-container');
+            container.innerHTML = '';
+            
+            // 开始循环创建弹幕
+            danmakuInterval = setInterval(() => {
+                if (!danmakuEnabled || document.hidden) return;
+                
+                const danmaku = document.createElement('div');
+                danmaku.className = 'danmaku-item';
+                danmaku.textContent = messages[Math.floor(Math.random() * messages.length)];
+                danmaku.style.top = `${Math.random() * 80 + 10}%`;
+                danmaku.style.animationDuration = `${Math.random() * 5 + 10}s`;
+                
+                container.appendChild(danmaku);
+                
+                // 动画结束后移除
+                setTimeout(() => {
+                    if (danmaku.parentNode) {
+                        danmaku.parentNode.removeChild(danmaku);
+                    }
+                }, 15000);
+            }, 3000);
+        }
+        
+        function stopDanmaku() {
+            if (danmakuInterval) {
+                clearInterval(danmakuInterval);
+                danmakuInterval = null;
+            }
+            
+            const container = document.getElementById('danmaku-container');
+            container.innerHTML = '';
+        }
+        
+        // ==================== 新闻 ====================
+        const newsData = [
+            { date: "2024-04-15", title: "GPT-5技术细节曝光，推理能力大幅提升", desc: "据内部消息，GPT-5在逻辑推理和数学能力上取得突破性进展，预计年底发布。" },
+            { date: "2024-04-14", title: "谷歌发布Gemini 2.0，多模态能力再升级", desc: "谷歌最新AI模型在图像理解和视频分析方面表现优异，超越GPT-4V。" },
+            { date: "2024-04-13", title: "AI Agent自主完成复杂任务，接近人类水平", desc: "研究人员开发出能够独立规划、执行复杂任务的AI Agent系统。" },
+            { date: "2024-04-12", title: "中国大模型公司获得10亿美元融资", desc: "国内AI创业公司完成新一轮融资，将用于大模型研发和商业化。" },
+            { date: "2024-04-11", title: "AI在医疗诊断领域取得重大突破", desc: "深度学习模型在癌症早期诊断中准确率达到98%，超越人类专家。" },
+            { date: "2024-04-10", title: "AI绘画工具Midjourney V7发布", desc: "最新版本在图像质量和创意控制方面都有显著提升。" }
+        ];
+        
         function loadNews() {
             const newsGrid = document.getElementById('news-grid');
             newsGrid.innerHTML = '';
@@ -2022,13 +2370,12 @@
             });
         }
         
-        // 加载待办事项
+        // ==================== 备忘录 ====================
         function loadTodos() {
             const savedTodos = localStorage.getItem('todos');
             if (savedTodos) {
                 todos = JSON.parse(savedTodos);
             } else {
-                // 初始化一些示例待办事项
                 todos = [
                     { id: 1, text: "学习机器学习基础知识", completed: true },
                     { id: 2, text: "阅读Transformer论文", completed: false },
@@ -2040,7 +2387,6 @@
             renderTodos();
         }
         
-        // 渲染待办事项
         function renderTodos() {
             const todoList = document.getElementById('todo-list');
             todoList.innerHTML = '';
@@ -2051,14 +2397,13 @@
                 todoItem.innerHTML = `
                     <input type="checkbox" class="todo-checkbox" ${todo.completed ? 'checked' : ''} 
                            onclick="toggleTodo(${todo.id})">
-                    <span class="todo-text">${todo.text}</span>
+                    <span class="todo-text" onclick="toggleTodo(${todo.id})">${todo.text}</span>
                     <button class="todo-delete" onclick="deleteTodo(${todo.id})">×</button>
                 `;
                 todoList.appendChild(todoItem);
             });
         }
         
-        // 添加待办事项
         function addTodo() {
             const input = document.getElementById('todo-input');
             const text = input.value.trim();
@@ -2079,7 +2424,6 @@
             }
         }
         
-        // 切换待办事项状态
         function toggleTodo(id) {
             const todo = todos.find(t => t.id === id);
             if (todo) {
@@ -2089,7 +2433,6 @@
             }
         }
         
-        // 删除待办事项
         function deleteTodo(id) {
             todos = todos.filter(t => t.id !== id);
             localStorage.setItem('todos', JSON.stringify(todos));
@@ -2097,7 +2440,7 @@
             showToast('待办事项已删除');
         }
         
-        // 加载文章
+        // ==================== 文章社区 ====================
         function loadArticles() {
             const savedArticles = localStorage.getItem('articles');
             if (savedArticles) {
@@ -2105,304 +2448,265 @@
             } else {
                 // 初始化一些示例文章
                 articles = [
-                    { id: 1, title: "我的AI学习计划", content: "计划用3个月时间系统学习机器学习和深度学习基础知识。" },
-                    { id: 2, title: "Transformer架构理解", content: "Attention Is All You Need论文的核心思想解读。" }
+                    { 
+                        id: 1, 
+                        title: "我的AI学习计划", 
+                        content: "计划用3个月时间系统学习机器学习和深度学习基础知识。首先从吴恩达的课程开始，然后学习深度学习框架PyTorch，最后做一个实战项目。目标是能够入门AI领域，找到一份相关工作。", 
+                        author: "admin",
+                        time: new Date().toLocaleString(),
+                        comments: []
+                    },
+                    { 
+                        id: 2, 
+                        title: "Transformer架构理解", 
+                        content: "Attention Is All You Need这篇论文提出的Transformer架构彻底改变了NLP领域。现在不仅NLP，CV、多模态都在用Transformer。Self-attention机制真的很强大。", 
+                        author: "zhangsan",
+                        time: new Date(Date.now() - 86400000).toLocaleString(),
+                        comments: [
+                            { author: "lisi", content: "写得很好，受益了！", time: new Date().toLocaleString() }
+                        ]
+                    }
                 ];
                 localStorage.setItem('articles', JSON.stringify(articles));
             }
             
             renderArticles();
+            updateCommunityCount();
         }
         
-        // 渲染文章
         function renderArticles() {
-            const articleList = document.getElementById('article-list');
-            articleList.innerHTML = '';
+            const articlesGrid = document.getElementById('articles-grid');
+            articlesGrid.innerHTML = '';
             
-            articles.forEach(article => {
-                const articleItem = document.createElement('li');
-                articleItem.className = 'article-item';
-                articleItem.innerHTML = `
-                    <div class="article-title">${article.title}</div>
-                    <div class="article-content">${article.content}</div>
-                    <div class="article-actions">
-                        <button class="article-action" onclick="editArticle(${article.id})">编辑</button>
-                        <button class="article-action" onclick="deleteArticle(${article.id})">删除</button>
+            if (articles.length === 0) {
+                articlesGrid.innerHTML = '<p style="color: var(--text-secondary); padding: 20px; text-align: center;">还没有文章，快来发布第一篇吧！</p>';
+                return;
+            }
+            
+            // 按时间倒序排列
+            const sortedArticles = [...articles].reverse();
+            
+            sortedArticles.forEach(article => {
+                const articleCard = document.createElement('div');
+                articleCard.className = 'article-card';
+                articleCard.onclick = () => openArticleDetail(article.id);
+                articleCard.innerHTML = `
+                    <div class="article-card-header">
+                        <div class="article-card-title">${article.title}</div>
+                        <div class="article-card-meta">
+                            <span>作者: ${article.author}</span>
+                            <span>${article.comments.length} 条评论</span>
+                        </div>
                     </div>
+                    <div class="article-card-excerpt">${article.content.substring(0, 100)}${article.content.length > 100 ? '...' : ''}</div>
                 `;
-                articleList.appendChild(articleItem);
+                articlesGrid.appendChild(articleCard);
             });
         }
         
-        // 添加文章
-        function addArticle() {
-            const title = document.getElementById('article-title').value.trim();
-            const content = document.getElementById('article-content').value.trim();
+        function updateCommunityCount() {
+            document.getElementById('community-count').innerHTML = `共 <strong>${articles.length}</strong> 篇文章</strong>`;
+        }
+        
+        function openCreateArticleModal() {
+            if (!currentUser) {
+                showToast('请先登录才能发布文章');
+                openModal('login');
+                return;
+            }
             
-            if (title && content) {
-                const newArticle = {
-                    id: Date.now(),
-                    title: title,
-                    content: content
-                };
-                
-                articles.push(newArticle);
-                localStorage.setItem('articles', JSON.stringify(articles));
-                renderArticles();
-                
-                document.getElementById('article-title').value = '';
-                document.getElementById('article-content').value = '';
-                
-                showToast('文章已发布');
+            document.getElementById('create-article-modal').classList.add('active');
+        }
+        
+        function closeCreateArticleModal(event) {
+            if (event === null || event.target.id === 'create-article-modal') {
+                document.getElementById('create-article-modal').classList.remove('active');
+                document.getElementById('new-article-title').value = '';
+                document.getElementById('new-article-content').value = '';
             }
         }
         
-        // 编辑文章
-        function editArticle(id) {
-            const article = articles.find(a => a.id === id);
-            if (article) {
-                document.getElementById('article-title').value = article.title;
-                document.getElementById('article-content').value = article.content;
-                
-                // 删除原文章
-                deleteArticle(id);
-                
-                showToast('可以编辑文章了');
+        function publishArticle() {
+            if (!currentUser) {
+                showToast('请先登录');
+                return;
             }
-        }
-        
-        // 删除文章
-        function deleteArticle(id) {
-            articles = articles.filter(a => a.id !== id);
-            localStorage.setItem('articles', JSON.stringify(articles));
-            renderArticles();
-            showToast('文章已删除');
-        }
-        
-        // 加载聊天消息
-        function loadChatMessages() {
-            const savedMessages = localStorage.getItem('chatMessages');
-            if (savedMessages) {
-                chatMessages = JSON.parse(savedMessages);
-            } else {
-                chatMessages = initialMessages;
-                localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
+            
+            const title = document.getElementById('new-article-title').value.trim();
+            const content = document.getElementById('new-article-content').value.trim();
+            
+            if (!title || !content) {
+                showToast('请填写标题和内容');
+                return;
             }
-        }
-        
-        // 打开聊天窗口
-        function openChat(userId) {
-            currentChatUser = chatUsers.find(u => u.id === userId);
-            if (!currentChatUser) return;
             
-            // 更新聊天窗口标题
-            document.getElementById('chat-target-name').textContent = currentChatUser.name;
-            document.getElementById('chat-target-avatar').textContent = currentChatUser.avatar;
-            
-            // 显示聊天窗口
-            document.getElementById('chat-window').classList.add('active');
-            
-            // 加载聊天消息
-            loadChatMessagesForUser(userId);
-            
-            // 标记为已读
-            markAsRead(userId);
-        }
-        
-        // 加载用户聊天消息
-        function loadChatMessagesForUser(userId) {
-            const chatMessagesDiv = document.getElementById('chat-messages');
-            chatMessagesDiv.innerHTML = '';
-            
-            const messages = chatMessages[userId] || [];
-            
-            messages.forEach(msg => {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${msg.sent ? 'sent' : 'received'}`;
-                messageDiv.innerHTML = `
-                    <div class="message-content">${msg.content}</div>
-                    <div class="message-time">${msg.time}</div>
-                `;
-                chatMessagesDiv.appendChild(messageDiv);
-            });
-            
-            // 滚动到底部
-            chatMessagesDiv.scrollTop = chatMessagesDiv.scrollHeight;
-        }
-        
-        // 发送消息
-        function sendMessage() {
-            if (!currentChatUser) return;
-            
-            const input = document.getElementById('chat-input');
-            const content = input.value.trim();
-            
-            if (!content) return;
-            
-            // 添加消息
-            const newMessage = {
-                sender: "我",
+            const newArticle = {
+                id: Date.now(),
+                title: title,
                 content: content,
-                time: getCurrentTime(),
-                sent: true
+                author: currentUser.username,
+                time: new Date().toLocaleString(),
+                comments: []
             };
             
-            if (!chatMessages[currentChatUser.id]) {
-                chatMessages[currentChatUser.id] = [];
+            articles.push(newArticle);
+            localStorage.setItem('articles', JSON.stringify(articles));
+            
+            closeCreateArticleModal(null);
+            renderArticles();
+            updateCommunityCount();
+            scrollToSection('articles');
+            showToast('文章发布成功！');
+            addDanmaku(`${currentUser.username} 发布了新文章：${title} 📝`);
+        }
+        
+        function openArticleDetail(articleId) {
+            const article = articles.find(a => a.id === articleId);
+            if (!article) return;
+            
+            currentArticleId = articleId;
+            
+            document.getElementById('view-article-title').textContent = article.title;
+            document.getElementById('view-article-author').textContent = article.author;
+            document.getElementById('view-article-time').textContent = article.time;
+            document.getElementById('view-article-content').textContent = article.content;
+            
+            renderArticleComments(articleId);
+            
+            document.querySelector('.articles-section').style.display = 'none';
+            document.getElementById('article-detail').classList.add('active');
+            scrollToSection('article-detail');
+        }
+        
+        function backToArticles() {
+            document.querySelector('.articles-section').style.display = 'block';
+            document.getElementById('article-detail').classList.remove('active');
+            currentArticleId = null;
+            scrollToSection('articles');
+        }
+        
+        function submitArticleComment() {
+            if (!currentUser) {
+                showToast('请先登录才能评论');
+                openModal('login');
+                return;
             }
             
-            chatMessages[currentChatUser.id].push(newMessage);
-            localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
+            const input = document.getElementById('article-comment-input');
+            const content = input.value.trim();
             
-            // 更新显示
-            loadChatMessagesForUser(currentChatUser.id);
+            if (!content || !currentArticleId) return;
             
-            // 清空输入框
+            const article = articles.find(a => a.id === currentArticleId);
+            if (!article) return;
+            
+            if (!article.comments) article.comments = [];
+            
+            article.comments.push({
+                author: currentUser.username,
+                content: content,
+                time: new Date().toLocaleString()
+            });
+            
+            localStorage.setItem('articles', JSON.stringify(articles));
+            renderArticleComments(currentArticleId);
             input.value = '';
+            showToast('评论发表成功');
+        }
+        
+        function renderArticleComments(articleId) {
+            const article = articles.find(a => a.id === articleId);
+            const commentList = document.getElementById('article-comment-list');
+            commentList.innerHTML = '';
             
-            // 模拟回复（如果是AI助手）
-            if (currentChatUser.id === 1) {
-                setTimeout(() => {
-                    const reply = {
-                        sender: "AI助手",
-                        content: "收到您的消息！我会尽快为您解答相关问题。",
-                        time: getCurrentTime(),
-                        sent: false
-                    };
-                    
-                    chatMessages[1].push(reply);
-                    localStorage.setItem('chatMessages', JSON.stringify(chatMessages));
-                    loadChatMessagesForUser(1);
-                }, 1000);
+            if (!article || !article.comments || article.comments.length === 0) {
+                commentList.innerHTML = '<li style="color: var(--text-secondary); padding: 10px;">暂无评论，快来抢沙发！</li>';
+                return;
             }
+            
+            article.comments.forEach(comment => {
+                const commentItem = document.createElement('li');
+                commentItem.className = 'article-comment-item';
+                commentItem.innerHTML = `
+                    <div class="article-comment-header">
+                        <div class="article-comment-author">${comment.author}</div>
+                        <div class="article-comment-time">${comment.time}</div>
+                    </div>
+                    <div class="article-comment-content">${comment.content}</div>
+                `;
+                commentList.appendChild(commentItem);
+            });
         }
         
-        // 标记为已读
-        function markAsRead(userId) {
-            // 在实际应用中，这里会更新未读消息状态
-        }
-        
-        // 关闭聊天窗口
-        function closeChat() {
-            document.getElementById('chat-window').classList.remove('active');
-            currentChatUser = null;
-            document.getElementById('chat-input').value = '';
-        }
-        
-        // 获取当前时间
-        function getCurrentTime() {
-            const now = new Date();
-            return `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
-        }
-        
-        // 切换边栏
+        // ==================== 边栏 ====================
         function toggleSidebar() {
+            if (window.innerWidth > 1200) return; // 大屏幕一直显示
+            
             const sidebar = document.getElementById('sidebar');
             const toggleBtn = document.getElementById('sidebar-toggle');
             
+            sidebar.classList.toggle('active');
+            toggleBtn.textContent = sidebar.classList.contains('active') ? '✕' : '📌';
+        }
+        
+        function closeSidebarOnMobile() {
             if (window.innerWidth <= 1200) {
-                sidebar.classList.toggle('active');
-                toggleBtn.textContent = sidebar.classList.contains('active') ? '✕' : '📌';
+                toggleSidebar();
             }
         }
         
-        // 切换主题
-        function toggleTheme() {
-            const body = document.body;
-            const isDark = body.getAttribute('data-theme') === 'dark';
+        // ==================== 学习资源渲染 ====================
+        function renderResources(moduleId) {
+            let resourcesData = [];
+            let total = 0;
             
-            if (isDark) {
-                body.removeAttribute('data-theme');
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-            }
-        }
-        
-        // 切换弹幕
-        function toggleDanmaku() {
-            const switchElement = document.getElementById('danmaku-switch');
-            danmakuEnabled = switchElement.checked;
-            
-            if (danmakuEnabled) {
-                startDanmaku();
-            } else {
-                stopDanmaku();
-            }
-        }
-        
-        // 开始弹幕
-        function startDanmaku() {
-            const messages = [
-                "欢迎来到阿杰的AI探索站！",
-                "机器学习真有趣！",
-                "深度学习改变世界",
-                "GPT-4太强大了",
-                "AI Agent是未来趋势",
-                "一起学习人工智能",
-                "这里的内容很棒！",
-                "弹幕效果很酷吧？"
-            ];
-            
-            // 清除现有弹幕
-            const container = document.getElementById('danmaku-container');
-            container.innerHTML = '';
-            
-            // 创建新弹幕
-            for (let i = 0; i < 5; i++) {
-                setTimeout(() => {
-                    if (!danmakuEnabled) return;
-                    
-                    const danmaku = document.createElement('div');
-                    danmaku.className = 'danmaku-item';
-                    danmaku.textContent = messages[Math.floor(Math.random() * messages.length)];
-                    danmaku.style.top = `${Math.random() * 80 + 10}%`;
-                    danmaku.style.animationDuration = `${Math.random() * 5 + 10}s`;
-                    
-                    container.appendChild(danmaku);
-                    
-                    // 动画结束后移除
-                    setTimeout(() => {
-                        if (danmaku.parentNode) {
-                            danmaku.parentNode.removeChild(danmaku);
-                        }
-                    }, 15000);
-                }, i * 2000);
+            switch(moduleId) {
+                case 'ml':
+                    resourcesData = mlResources;
+                    break;
+                case 'dl':
+                    resourcesData = dlResources;
+                    break;
+                case 'llm':
+                    resourcesData = llmResources;
+                    break;
+                case 'agent':
+                    resourcesData = agentResources;
+                    break;
             }
             
-            // 循环创建弹幕
-            setInterval(() => {
-                if (!danmakuEnabled || document.hidden) return;
+            // 计算总数
+            resourcesData.forEach(cat => {
+                total += cat.resources.length;
+            });
+            
+            let html = '';
+            resourcesData.forEach(cat => {
+                html += `<div class="resource-category">
+                    <h3 class="resource-category-title">${cat.category} (${cat.resources.length}个)</h3>
+                    <div class="resource-list">
+                `;
                 
-                const danmaku = document.createElement('div');
-                danmaku.className = 'danmaku-item';
-                danmaku.textContent = messages[Math.floor(Math.random() * messages.length)];
-                danmaku.style.top = `${Math.random() * 80 + 10}%`;
-                danmaku.style.animationDuration = `${Math.random() * 5 + 10}s`;
+                cat.resources.forEach(res => {
+                    html += `
+                        <div class="resource-item">
+                            <div class="resource-title"><a href="${res.url}" target="_blank">${res.name}</a></div>
+                            <div class="resource-desc">${res.desc}</div>
+                        </div>
+                    `;
+                });
                 
-                container.appendChild(danmaku);
-                
-                // 动画结束后移除
-                setTimeout(() => {
-                    if (danmaku.parentNode) {
-                        danmaku.parentNode.removeChild(danmaku);
-                    }
-                }, 15000);
-            }, 3000);
+                html += `</div></div>`;
+            });
+            
+            return html;
         }
         
-        // 停止弹幕
-        function stopDanmaku() {
-            const container = document.getElementById('danmaku-container');
-            container.innerHTML = '';
-        }
-        
-        // 显示模块详情
+        // ==================== 模块展示 ====================
         function showDetails(moduleId) {
             const detailsContainer = document.getElementById('module-details-container');
             
-            // 模块数据
+            // 模块基本数据
             const modules = {
                 history: {
                     title: "📜 人工智能发展历史",
@@ -2448,6 +2752,59 @@
                                 <div>ChatGPT发布，AI进入新时代</div>
                             </div>
                         </div>
+                        
+                        <h3>📚 推荐学习资源</h3>
+                        <div class="resource-list">
+                            <div class="resource-item">
+                                <div class="resource-title"><a href="https://en.wikipedia.org/wiki/History_of_artificial_intelligence" target="_blank">Wikipedia - AI历史</a></div>
+                                <div class="resource-desc">维基百科AI发展历史详细介绍</div>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-title"><a href="https://blogs.nvidia.com/blog/2016/06/02/history-deep-learning/" target="_blank">深度学习简史</a></div>
+                                <div class="resource-desc">NVIDIA博客深度学习发展历史</div>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-title"><a href="https://www.coursera.org/lecture/machine-learning/history-of-ai" target="_blank">吴恩达讲AI历史</a></div>
+                                <div class="resource-desc">Coursera课程中AI历史讲解</div>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-title"><a href="https://www.amazon.com/Artificial-Intelligence-Guide--Thinking-ebook/dp/B00XW0S9H8" target="_blank">《人工智能》- Russell & Norvig</a></div>
+                                <div class="resource-desc">AI经典教材，包含完整历史介绍</div>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-title"><a href="https://www.youtube.com/playlist?list=PLn8PRpmsu08pBY-Bt25sJRBjRrVbhqgkm6" target="_blank">AI历史视频教程</a></div>
+                                <div>AI发展历史视频讲解</div>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-title"><a href="https://www.aihub.cn/news/ai-history/" target="_blank">AI发展历史 - 中文</a></div>
+                                <div>中文详细介绍AI发展史</div>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-title"><a href="https://www.ted.com/talks/ray_kurzweil_how_ai_will_bring_us_a_renaissance" target="_blank">TED AI未来演讲</a></div>
+                                <div>Ray Kurzweil谈AI发展未来</div>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-title"><a href="https://zh.wikipedia.org/zh-cn/%D8%A5%E8%BE%BE%E8%8E%AB%E6%9C%83%E8%AE%AE" target="_blank">达特茅斯会议 - 中文维基</a></div>
+                                <div>AI诞生地详细介绍</div>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-title"><a href="https://www.bszcn.cn/ai/ai-history.html" target="_blank">AI三起三落</a></div>
+                                <div>AI三次寒冬三次春天详细介绍</div>
+                            </div>
+                            <div class="resource-item">
+                                <div class="resource-title"><a href="https://arxiv.org/pdf/2202.03298.pdf" target="_blank">A Brief History of AI (论文)</a></div>
+                                <div>arXiv上AI历史综述论文</div>
+                            </div>
+                        </div>
+                        
+                        <div class="comments-section" id="comments-history">
+                            <h3 class="comments-title">💬 讨论区</h3>
+                            <div class="comment-form">
+                                <textarea class="comment-input" id="comment-history" placeholder="分享你的看法..."></textarea>
+                                <button class="submit-comment" onclick="submitComment('history')">发表评论</button>
+                            </div>
+                            <ul class="comment-list" id="comments-history"></ul>
+                        </div>
                     `
                 },
                 ml: {
@@ -2470,31 +2827,11 @@
                                 <div class="resource-desc">通过与环境交互获得奖励来学习最优策略</div>
                             </li>
                         </ul>
-                        
-                        <h3>📚 学习资源</h3>
-                        <ul class="resource-list">
-                            <li class="resource-item">
-                                <div class="resource-title">吴恩达《机器学习》课程</div>
-                                <div class="resource-desc">Coursera经典入门课程，深入浅出讲解ML基础</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">《Python机器学习》</div>
-                                <div class="resource-desc">Sebastian Raschka著，实战导向的Python ML教程</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">Kaggle实战项目</div>
-                                <div class="resource-desc">参与竞赛和项目，在实践中提升技能</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">Scikit-learn官方文档</div>
-                                <div class="resource-desc">Python机器学习库的权威文档和教程</div>
-                            </li>
-                        </ul>
-                        
-                        <div class="comments-section">
+                        ${renderResources('ml')}
+                        <div class="comments-section" id="comments-ml">
                             <h3 class="comments-title">💬 讨论区</h3>
                             <div class="comment-form">
-                                <textarea class="comment-input" id="comment-ml" placeholder="分享你的想法..."></textarea>
+                                <textarea class="comment-input" id="comment-ml" placeholder="分享你的看法..."></textarea>
                                 <button class="submit-comment" onclick="submitComment('ml')">发表评论</button>
                             </div>
                             <ul class="comment-list" id="comments-ml"></ul>
@@ -2525,31 +2862,11 @@
                                 <div class="resource-desc">基于注意力机制的革命性架构</div>
                             </li>
                         </ul>
-                        
-                        <h3>📚 学习资源</h3>
-                        <ul class="resource-list">
-                            <li class="resource-item">
-                                <div class="resource-title">《深度学习》花书</div>
-                                <div class="resource-desc">Ian Goodfellow等著，深度学习领域的圣经</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">PyTorch官方教程</div>
-                                <div class="resource-desc">深度学习框架PyTorch的官方学习路径</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">Fast.ai实战课程</div>
-                                <div class="resource-desc">自顶向下的深度学习教学方法，快速上手</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">CS231n斯坦福课程</div>
-                                <div class="resource-desc">计算机视觉与深度学习的经典课程</div>
-                            </li>
-                        </ul>
-                        
-                        <div class="comments-section">
+                        ${renderResources('dl')}
+                        <div class="comments-section" id="comments-dl">
                             <h3 class="comments-title">💬 讨论区</h3>
                             <div class="comment-form">
-                                <textarea class="comment-input" id="comment-dl" placeholder="分享你的想法..."></textarea>
+                                <textarea class="comment-input" id="comment-dl" placeholder="分享你的看法..."></textarea>
                                 <button class="submit-comment" onclick="submitComment('dl')">发表评论</button>
                             </div>
                             <ul class="comment-list" id="comments-dl"></ul>
@@ -2559,20 +2876,20 @@
                 llm: {
                     title: "🌐 大语言模型",
                     content: `
-                        <p>大语言模型（Large Language Models，LLM）是基于Transformer架构的巨型神经网络，拥有数千亿参数。它们通过在海量文本数据上预训练，能够理解和生成人类语言，展现出惊人的能力。</p>
+                        <p>大语言模型（Large Language Models，LLM）是基于Transformer架构的巨型神经网络，拥有数十亿到万亿参数。它们通过在海量文本数据上预训练，能够理解和生成人类语言，展现出惊人的能力。</p>
                         
                         <h3>代表性模型</h3>
                         <ul class="resource-list">
                             <li class="resource-item">
-                                <div class="resource-title">GPT系列</div>
+                                <div class="resource-title">GPT系列 (OpenAI)</div>
                                 <div class="resource-desc">OpenAI开发的生成式预训练Transformer模型</div>
                             </li>
                             <li class="resource-item">
-                                <div class="resource-title">LLaMA</div>
+                                <div class="resource-title">LLaMA (Meta)</div>
                                 <div class="resource-desc">Meta开源的大语言模型系列</div>
                             </li>
                             <li class="resource-item">
-                                <div class="resource-title">Claude</div>
+                                <div class="resource-title">Claude (Anthropic)</div>
                                 <div class="resource-desc">Anthropic开发的注重安全性的大模型</div>
                             </li>
                             <li class="resource-item">
@@ -2580,31 +2897,11 @@
                                 <div class="resource-desc">国内领先的大语言模型</div>
                             </li>
                         </ul>
-                        
-                        <h3>📚 学习资源</h3>
-                        <ul class="resource-list">
-                            <li class="resource-item">
-                                <div class="resource-title">《Attention Is All You Need》论文</div>
-                                <div class="resource-desc">Transformer架构的原始论文，必读经典</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">Hugging Face Transformers</div>
-                                <div class="resource-desc">最流行的NLP库，提供海量预训练模型</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">OpenAI API开发指南</div>
-                                <div class="resource-desc">如何使用GPT API构建应用</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">LangChain框架</div>
-                                <div class="resource-desc">构建LLM应用的强大框架</div>
-                            </li>
-                        </ul>
-                        
-                        <div class="comments-section">
+                        ${renderResources('llm')}
+                        <div class="comments-section" id="comments-llm">
                             <h3 class="comments-title">💬 讨论区</h3>
                             <div class="comment-form">
-                                <textarea class="comment-input" id="comment-llm" placeholder="分享你的想法..."></textarea>
+                                <textarea class="comment-input" id="comment-llm" placeholder="分享你的看法..."></textarea>
                                 <button class="submit-comment" onclick="submitComment('llm')">发表评论</button>
                             </div>
                             <ul class="comment-list" id="comments-llm"></ul>
@@ -2635,31 +2932,11 @@
                                 <div class="resource-desc">从经验中不断改进性能</div>
                             </li>
                         </ul>
-                        
-                        <h3>📚 学习资源</h3>
-                        <ul class="resource-list">
-                            <li class="resource-item">
-                                <div class="resource-title">《Reinforcement Learning》</div>
-                                <div class="resource-desc">Sutton & Barto著，强化学习领域的圣经</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">LangChain Agents文档</div>
-                                <div class="resource-desc">构建LLM Agent的完整指南</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">AutoGPT开源项目</div>
-                                <div class="resource-desc">自主AI Agent的先驱项目</div>
-                            </li>
-                            <li class="resource-item">
-                                <div class="resource-title">BabyAGI</div>
-                                <div class="resource-desc">任务驱动的AI Agent实现</div>
-                            </li>
-                        </ul>
-                        
-                        <div class="comments-section">
+                        ${renderResources('agent')}
+                        <div class="comments-section" id="comments-agent">
                             <h3 class="comments-title">💬 讨论区</h3>
                             <div class="comment-form">
-                                <textarea class="comment-input" id="comment-agent" placeholder="分享你的想法..."></textarea>
+                                <textarea class="comment-input" id="comment-agent" placeholder="分享你的看法..."></textarea>
                                 <button class="submit-comment" onclick="submitComment('agent')">发表评论</button>
                             </div>
                             <ul class="comment-list" id="comments-agent"></ul>
@@ -2669,7 +2946,21 @@
             };
             
             const module = modules[moduleId];
-            if (!module) return;
+            let totalResources = 0;
+            
+            // 统计总数
+            if (moduleId === 'history') {
+                // 历史模块我们数一下
+                totalResources = 10;
+            } else if (moduleId === 'ml') {
+                mlResources.forEach(cat => totalResources += cat.resources.length);
+            } else if (moduleId === 'dl') {
+                dlResources.forEach(cat => totalResources += cat.resources.length);
+            } else if (moduleId === 'llm') {
+                llmResources.forEach(cat => totalResources += cat.resources.length);
+            } else if (moduleId === 'agent') {
+                agentResources.forEach(cat => totalResources += cat.resources.length);
+            }
             
             detailsContainer.innerHTML = `
                 <div class="module-details active">
@@ -2679,6 +2970,9 @@
                     </div>
                     <div class="details-content">
                         ${module.content}
+                        <p style="margin-top: 20px; color: var(--accent); font-weight: bold;">
+                            👉 当前模块总共整理了 <span style="font-size: 1.3rem;">${totalResources}</span> 个优质学习资源，全部可点击直达！
+                        </p>
                     </div>
                 </div>
             `;
@@ -2690,122 +2984,11 @@
             loadComments(moduleId);
         }
         
-        // 关闭详情
         function closeDetails() {
             document.getElementById('module-details-container').innerHTML = '';
         }
         
-        // 加载评论
-        function loadComments(moduleId) {
-            const commentList = document.getElementById(`comments-${moduleId}`);
-            if (!commentList) return;
-            
-            const savedComments = localStorage.getItem(`comments-${moduleId}`);
-            const comments = savedComments ? JSON.parse(savedComments) : [];
-            
-            commentList.innerHTML = '';
-            
-            comments.forEach(comment => {
-                const commentItem = document.createElement('li');
-                commentItem.className = 'comment-item';
-                commentItem.innerHTML = `
-                    <div class="comment-header">
-                        <div class="comment-author">
-                            <div class="comment-avatar">${comment.author.charAt(0)}</div>
-                            <span>${comment.author}</span>
-                        </div>
-                        <div class="comment-time">${comment.time}</div>
-                    </div>
-                    <div class="comment-content">${comment.content}</div>
-                    <div class="comment-actions">
-                        <button class="comment-action">👍 ${comment.likes || 0}</button>
-                        <button class="comment-action">💬 回复</button>
-                    </div>
-                `;
-                commentList.appendChild(commentItem);
-            });
-        }
-        
-        // 提交评论
-        function submitComment(moduleId) {
-            if (!currentUser) {
-                showToast('请先登录后再发表评论');
-                openModal('login');
-                return;
-            }
-            
-            const commentInput = document.getElementById(`comment-${moduleId}`);
-            const content = commentInput.value.trim();
-            
-            if (!content) return;
-            
-            const savedComments = localStorage.getItem(`comments-${moduleId}`);
-            const comments = savedComments ? JSON.parse(savedComments) : [];
-            
-            const newComment = {
-                id: Date.now(),
-                author: currentUser.username,
-                content: content,
-                time: getCurrentTime(),
-                likes: 0
-            };
-            
-            comments.push(newComment);
-            localStorage.setItem(`comments-${moduleId}`, JSON.stringify(comments));
-            
-            loadComments(moduleId);
-            commentInput.value = '';
-            
-            showToast('评论已发表');
-        }
-        
-        // 点赞功能
-        function toggleLike(moduleId) {
-            const likeBtn = document.querySelector(`.like-btn[data-module="${moduleId}"]`);
-            const likeCount = likeBtn.querySelector('.like-count');
-            
-            let count = parseInt(likeCount.textContent);
-            const isLiked = likeBtn.classList.contains('liked');
-            
-            if (isLiked) {
-                count--;
-                likeBtn.classList.remove('liked');
-            } else {
-                count++;
-                likeBtn.classList.add('liked');
-            }
-            
-            likeCount.textContent = count;
-            
-            // 保存点赞状态
-            const likes = JSON.parse(localStorage.getItem('likes') || '{}');
-            likes[moduleId] = count;
-            localStorage.setItem('likes', JSON.stringify(likes));
-        }
-        
-        // 滚动到指定区域
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-        }
-        
-        // 打开弹窗
-        function openModal(modalId) {
-            document.getElementById(`${modalId}-modal`).classList.add('active');
-            
-            if (modalId === 'profile') {
-                loadProfile();
-            }
-        }
-        
-        // 关闭弹窗
-        function closeModal(modalId) {
-            document.getElementById(`${modalId}-modal`).classList.remove('active');
-        }
-        
-        // 检查登录状态
+        // ==================== 用户系统 ====================
         function checkLoginStatus() {
             const savedUser = localStorage.getItem('currentUser');
             if (savedUser) {
@@ -2814,7 +2997,17 @@
             }
         }
         
-        // 登录
+        function updateUserUI() {
+            if (currentUser) {
+                // 更新导航栏头像
+                const firstChar = currentUser.username.charAt(0).toUpperCase();
+                document.getElementById('nav-avatar-text').textContent = currentUser.avatar ? '' : firstChar;
+                if (currentUser.avatar && currentUser.avatar.startsWith('data:')) {
+                    document.getElementById('nav-avatar').innerHTML = `<img src="${currentUser.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+                }
+            }
+        }
+        
         function login() {
             const username = document.getElementById('login-username').value.trim();
             const password = document.getElementById('login-password').value.trim();
@@ -2838,9 +3031,9 @@
             closeModal('login');
             
             showToast(`欢迎回来，${username}！`);
+            addDanmaku(`${username} 刚刚登录了阿杰AI探索站 👋`);
         }
         
-        // 注册
         function register() {
             const username = document.getElementById('login-username').value.trim();
             const password = document.getElementById('login-password').value.trim();
@@ -2864,22 +3057,21 @@
             closeModal('login');
             
             showToast(`注册成功，欢迎${username}！`);
+            addDanmaku(`新用户 ${username} 加入了AI探索站 🎉`);
         }
         
-        // 更新用户界面
-        function updateUserUI() {
-            if (currentUser) {
-                // 更新导航栏头像
-                const navAvatar = document.getElementById('nav-avatar-text');
-                navAvatar.textContent = currentUser.avatar;
-                
-                // 更新用户区域
-                const userArea = document.getElementById('nav-avatar');
-                userArea.setAttribute('title', currentUser.username);
+        function openModal(modalId) {
+            document.getElementById(`${modalId}-modal`).classList.add('active');
+            
+            if (modalId === 'profile') {
+                loadProfile();
             }
         }
         
-        // 加载个人资料
+        function closeModal(modalId) {
+            document.getElementById(`${modalId}-modal`).classList.remove('active');
+        }
+        
         function loadProfile() {
             const profileContent = document.getElementById('profile-content');
             
@@ -2896,14 +3088,16 @@
             profileContent.innerHTML = `
                 <div class="profile-info-v2">
                     <div class="profile-avatar-v2" id="profile-avatar">
-                        <span>${currentUser.avatar}</span>
+                        ${currentUser.avatar && currentUser.avatar.startsWith('data:') 
+                            ? `<img src="${currentUser.avatar}" alt="${currentUser.username}">` 
+                            : `<span>${currentUser.avatar || currentUser.username.charAt(0).toUpperCase()}</span>`}
                     </div>
                     <div class="profile-details-v2">
                         <div class="profile-name-v2">${currentUser.username}</div>
-                        <div class="profile-bio">${currentUser.bio}</div>
+                        <div class="profile-bio">${currentUser.bio || 'AI爱好者'}</div>
                         <div class="profile-meta">
-                            <span class="meta-tag">${currentUser.gender}</span>
-                            <span class="meta-tag">${currentUser.age}岁</span>
+                            <span class="meta-tag">${currentUser.gender || '保密'}</span>
+                            ${currentUser.age ? `<span class="meta-tag">${currentUser.age}岁</span>` : ''}
                         </div>
                     </div>
                 </div>
@@ -2912,11 +3106,13 @@
                     <label class="form-label">头像</label>
                     <div class="avatar-upload">
                         <div class="avatar-preview" id="avatar-preview">
-                            <span>${currentUser.avatar}</span>
+                            ${currentUser.avatar && currentUser.avatar.startsWith('data:') 
+                                ? `<img src="${currentUser.avatar}" alt="头像">` 
+                                : `<span>${currentUser.avatar || currentUser.username.charAt(0).toUpperCase()}</span>`}
                         </div>
                         <div class="avatar-upload-controls">
                             <input type="file" class="avatar-input" id="avatar-input" accept="image/*" onchange="previewAvatar()">
-                            <button class="avatar-upload-btn" onclick="document.getElementById('avatar-input').click()">选择图片</button>
+                            <label for="avatar-input" class="avatar-upload-btn">选择图片</label>
                         </div>
                     </div>
                 </div>
@@ -2933,7 +3129,7 @@
                             <span>女</span>
                         </label>
                         <label class="radio-item">
-                            <input type="radio" name="gender" value="保密" ${currentUser.gender === '保密' ? 'checked' : ''}>
+                            <input type="radio" name="gender" value="保密" ${(!currentUser.gender || currentUser.gender === '保密') ? 'checked' : ''}>
                             <span>保密</span>
                         </label>
                     </div>
@@ -2941,12 +3137,12 @@
                 
                 <div class="form-group">
                     <label class="form-label">年龄</label>
-                    <input type="number" class="form-input" id="profile-age" value="${currentUser.age}" min="1" max="120">
+                    <input type="number" class="form-input" id="profile-age" value="${currentUser.age || ''}" min="1" max="120">
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label">个人简介</label>
-                    <textarea class="form-textarea" id="profile-bio">${currentUser.bio}</textarea>
+                    <textarea class="form-textarea" id="profile-bio">${currentUser.bio || ''}</textarea>
                 </div>
                 
                 <div class="form-buttons">
@@ -2956,48 +3152,46 @@
             `;
         }
         
-        // 预览头像
         function previewAvatar() {
             const input = document.getElementById('avatar-input');
-            const preview = document.getElementById('avatar-preview');
+            const preview = document.querySelector('#profile-modal #avatar-preview');
             
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 
                 reader.onload = function(e) {
                     preview.innerHTML = `<img src="${e.target.result}" alt="头像">`;
+                    window._pendingAvatar = e.target.result;
                 };
                 
                 reader.readAsDataURL(input.files[0]);
             }
         }
         
-        // 保存个人资料
         function saveProfile() {
             if (!currentUser) return;
             
-            const gender = document.querySelector('input[name="gender"]:checked').value;
+            const gender = document.querySelector('#profile-modal input[name="gender"]:checked').value;
             const age = document.getElementById('profile-age').value;
             const bio = document.getElementById('profile-bio').value;
             
             currentUser.gender = gender;
-            currentUser.age = parseInt(age);
+            currentUser.age = age ? parseInt(age) : '';
             currentUser.bio = bio;
             
             // 更新头像（如果有新头像）
-            const preview = document.getElementById('avatar-preview');
-            const img = preview.querySelector('img');
-            if (img) {
-                currentUser.avatar = img.src;
+            if (window._pendingAvatar) {
+                currentUser.avatar = window._pendingAvatar;
+                window._pendingAvatar = null;
             }
             
             localStorage.setItem('currentUser', JSON.stringify(currentUser));
             updateUserUI();
             
             showToast('个人资料已保存');
+            closeModal('profile');
         }
         
-        // 退出登录
         function logout() {
             currentUser = null;
             localStorage.removeItem('currentUser');
@@ -3007,7 +3201,58 @@
             showToast('已退出登录');
         }
         
-        // 显示提示
+        // ==================== 滚动 ====================
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        // ==================== 主题切换 ====================
+        function toggleTheme() {
+            const body = document.body;
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            
+            if (isDark) {
+                body.removeAttribute('data-theme');
+                document.getElementById('theme-icon-nav').textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-icon-nav').textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+        
+        // ==================== 弹幕 ====================
+        function addDanmaku(text) {
+            if (!danmakuEnabled) return;
+            
+            const container = document.getElementById('danmaku-container');
+            const item = document.createElement('div');
+            item.className = 'danmaku-item';
+            item.textContent = text;
+            
+            const colors = ['#ffffff', '#ffd700', '#87ceeb', '#98fb98', '#ffb6c1'];
+            item.style.color = colors[Math.floor(Math.random() * colors.length)];
+            
+            const top = Math.random() * 70 + 5;
+            item.style.top = `${top}%`;
+            
+            const duration = 8 + Math.random() * 7;
+            item.style.animationDuration = `${duration}s`;
+            
+            container.appendChild(item);
+            
+            setTimeout(() => {
+                if (item.parentNode) {
+                    item.parentNode.removeChild(item);
+                }
+            }, duration * 1000);
+        }
+        
+        // ==================== 工具函数 ====================
         function showToast(message) {
             const toast = document.getElementById('toast');
             toast.textContent = message;
@@ -3018,7 +3263,6 @@
             }, 3000);
         }
         
-        // 初始化粒子背景
         function initParticles() {
             // 简化版粒子效果
             const canvas = document.createElement('canvas');
@@ -3063,19 +3307,16 @@
                     particle.x += particle.speedX;
                     particle.y += particle.speedY;
                     
-                    // 边界检查
                     if (particle.x < 0) particle.x = canvas.width;
                     if (particle.x > canvas.width) particle.x = 0;
                     if (particle.y < 0) particle.y = canvas.height;
                     if (particle.y > canvas.height) particle.y = 0;
                     
-                    // 绘制粒子
                     ctx.beginPath();
                     ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
                     ctx.fillStyle = particle.color;
                     ctx.fill();
                     
-                    // 绘制连线
                     particles.forEach(otherParticle => {
                         const dx = particle.x - otherParticle.x;
                         const dy = particle.y - otherParticle.y;
@@ -3095,19 +3336,105 @@
                 requestAnimationFrame(animateParticles);
             }
             
-            // 初始化
             resizeCanvas();
             createParticles();
             animateParticles();
             
-            // 窗口大小改变时重新调整
             window.addEventListener('resize', () => {
                 resizeCanvas();
                 createParticles();
             });
         }
         
-        // 页面加载完成后初始化
+        // ==================== 评论 ====================
+        function loadComments(moduleId) {
+            const commentList = document.getElementById(`comments-${moduleId}`);
+            if (!commentList) return;
+            
+            const savedComments = localStorage.getItem(`comments-${moduleId}`);
+            const comments = savedComments ? JSON.parse(savedComments) : [];
+            
+            commentList.innerHTML = '';
+            
+            comments.forEach(comment => {
+                const commentItem = document.createElement('li');
+                commentItem.className = 'comment-item';
+                commentItem.innerHTML = `
+                    <div class="comment-header">
+                        <div class="comment-author">
+                            <div class="comment-avatar">${comment.author.charAt(0).toUpperCase()}</div>
+                            <span>${comment.author}</span>
+                        </div>
+                        <div class="comment-time">${comment.time}</div>
+                    </div>
+                    <div class="comment-content">${comment.content}</div>
+                    <div class="comment-actions">
+                        <button class="comment-action">👍 ${comment.likes || 0}</button>
+                        <button class="comment-action">💬 回复</button>
+                    </div>
+                `;
+                commentList.appendChild(commentItem);
+            });
+        }
+        
+        function submitComment(moduleId) {
+            if (!currentUser) {
+                showToast('请先登录后再发表评论');
+                openModal('login');
+                return;
+            }
+            
+            const commentInput = document.getElementById(`comment-${moduleId}`);
+            const content = commentInput.value.trim();
+            
+            if (!content) return;
+            
+            const savedComments = localStorage.getItem(`comments-${moduleId}`);
+            const comments = savedComments ? JSON.parse(savedComments) : [];
+            
+            const newComment = {
+                id: Date.now(),
+                author: currentUser.username,
+                content: content,
+                time: new Date().toLocaleString(),
+                likes: 0
+            };
+            
+            comments.push(newComment);
+            localStorage.setItem(`comments-${moduleId}`, JSON.stringify(comments));
+            
+            loadComments(moduleId);
+            commentInput.value = '';
+            
+            showToast('评论已发表');
+            addDanmaku(`${currentUser.username} 在 ${moduleId} 发表了评论 💬`);
+        }
+        
+        // 点赞功能
+        function toggleLike(moduleId) {
+            const likeBtn = document.querySelector(`.like-btn[data-module="${moduleId}"]`);
+            const likeCount = likeBtn.querySelector('.like-count');
+            
+            let count = parseInt(likeCount.textContent);
+            const isLiked = likeBtn.classList.contains('liked');
+            
+            if (isLiked) {
+                count--;
+                likeBtn.classList.remove('liked');
+            } else {
+                count++;
+                likeBtn.classList.add('liked');
+            }
+            
+            likeCount.textContent = count;
+            
+            // 保存点赞状态
+            const likes = JSON.parse(localStorage.getItem('likes') || '{}');
+            likes[moduleId] = count;
+            localStorage.setItem('likes', JSON.stringify(likes));
+        }
+        
+        // ==================== DOM加载完成 ====================
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
