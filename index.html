@@ -47,7 +47,6 @@
             padding: 20px;
         }
         
-        /* 顶部导航 */
         .header {
             display: flex;
             justify-content: space-between;
@@ -86,7 +85,6 @@
             border-color: var(--accent);
         }
         
-        /* Hero 区域 */
         .hero {
             text-align: center;
             padding: 60px 20px;
@@ -128,7 +126,6 @@
             z-index: 1;
         }
         
-        /* 模块卡片 */
         .modules {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -177,7 +174,6 @@
             gap: 5px;
         }
         
-        /* 详情区域 */
         .module-details {
             background: var(--bg-secondary);
             border-radius: 15px;
@@ -269,7 +265,6 @@
             font-size: 0.95rem;
         }
         
-        /* 时间线 */
         .timeline {
             position: relative;
             padding-left: 30px;
@@ -309,7 +304,6 @@
             margin-bottom: 5px;
         }
         
-        /* 页脚 */
         .footer {
             text-align: center;
             padding: 40px 20px;
@@ -339,7 +333,6 @@
             color: var(--accent);
         }
         
-        /* 响应式设计 */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -355,26 +348,10 @@
                 text-align: center;
             }
         }
-        
-        /* 加载动画 */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid var(--bg-secondary);
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- 顶部导航 -->
         <header class="header">
             <div class="logo">
                 🤖 阿杰的AI探索站
@@ -385,13 +362,11 @@
             </button>
         </header>
         
-        <!-- Hero 区域 -->
         <div class="hero">
             <h1>探索人工智能的无限可能</h1>
             <p>从历史到未来，从理论到实践，一起开启AI学习之旅</p>
         </div>
         
-        <!-- 模块卡片 -->
         <div class="modules">
             <div class="module-card" onclick="showDetails('history')">
                 <div class="module-icon">📜</div>
@@ -429,7 +404,6 @@
             </div>
         </div>
         
-        <!-- 详情区域 -->
         <div id="details-history" class="module-details">
             <div class="details-header">
                 <h2>📜 人工智能发展历史</h2>
@@ -676,7 +650,6 @@
             </div>
         </div>
         
-        <!-- 页脚 -->
         <footer class="footer">
             <p>© 2024 阿杰的AI探索站 | 持续更新中...</p>
             <div class="visitor-count">
@@ -689,7 +662,6 @@
     </div>
     
     <script>
-        // 黑夜模式切换
         function toggleTheme() {
             const body = document.body;
             const isDark = body.getAttribute('data-theme') === 'dark';
@@ -707,37 +679,30 @@
             }
         }
         
-        // 显示详情
         function showDetails(moduleId) {
-            // 隐藏所有详情
             document.querySelectorAll('.module-details').forEach(el => {
                 el.classList.remove('active');
             });
             
-            // 显示选中的详情
-            const details = document.getElementById(`details-${moduleId}`);
+            const details = document.getElementById('details-' + moduleId);
             if (details) {
                 details.classList.add('active');
-                // 平滑滚动到详情区域
                 details.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
         
-        // 关闭详情
         function closeDetails() {
             document.querySelectorAll('.module-details').forEach(el => {
                 el.classList.remove('active');
             });
         }
         
-        // 访客计数
         function initVisitorCount() {
             let count = localStorage.getItem('visitorCount') || 1;
             document.getElementById('visitor-count').textContent = count;
             localStorage.setItem('visitorCount', parseInt(count) + 1);
         }
         
-        // 初始化主题
         function initTheme() {
             const savedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -749,12 +714,10 @@
             }
         }
         
-        // 页面加载时初始化
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
             initVisitorCount();
             
-            // 添加滚动动画效果
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -772,5 +735,6 @@
             });
         });
     </script>
+</body</div>
 </body>
 </html>
