@@ -40,6 +40,7 @@
             line-height: 1.6;
             transition: all 0.3s ease;
             overflow-x: hidden;
+            padding-top: 80px;
         }
         
         #particles-js {
@@ -53,45 +54,109 @@
             opacity: 0.3;
         }
         
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
+        /* 顶部导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(var(--bg-rgb), 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            transition: all 0.3s ease;
         }
         
-        .header {
+        :root {
+            --bg-rgb: 248, 249, 250;
+        }
+        
+        [data-theme="dark"] {
+            --bg-rgb: 18, 18, 18;
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            margin-bottom: 30px;
-            border-bottom: 2px solid var(--border);
+            height: 70px;
         }
         
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
+        .navbar-brand {
+            font-size: 1.5rem;
             font-weight: bold;
             color: var(--accent);
             display: flex;
             align-items: center;
             gap: 10px;
+            text-decoration: none;
         }
         
-        .user-area {
+        .nav-menu {
             display: flex;
+            list-style: none;
+            gap: 5px;
             align-items: center;
-            gap: 10px;
         }
         
-        .user-avatar {
+        .nav-item {
+            position: relative;
+        }
+        
+        .nav-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: block;
+        }
+        
+        .nav-link:hover {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .nav-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+            min-width: 180px;
+            display: none;
+            z-index: 101;
+            margin-top: 5px;
+        }
+        
+        .nav-item:hover .nav-dropdown {
+            display: block;
+            animation: fadeIn 0.2s ease;
+        }
+        
+        .dropdown-item {
+            padding: 10px 15px;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: block;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border-radius: 6px;
+            margin: 2px;
+        }
+        
+        .dropdown-item:hover {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .user-avatar-nav {
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -105,50 +170,98 @@
             transition: transform 0.3s ease;
         }
         
-        .user-avatar:hover {
+        .user-avatar-nav:hover {
             transform: scale(1.1);
         }
         
-        .login-btn {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
         }
         
-        .login-btn:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
+        /* 新闻区域 */
+        .news-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
             box-shadow: 0 5px 15px var(--shadow);
         }
         
-        .theme-toggle {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            color: var(--text-primary);
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--accent);
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border);
         }
         
-        .theme-toggle:hover {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .news-card {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid var(--accent);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+        
+        .news-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        .news-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .news-source {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .news-source a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .news-source a:hover {
+            text-decoration: underline;
         }
         
         .hero {
             text-align: center;
-            padding: 80px 20px 60px 20px;
+            padding: 60px 20px 40px 20px;
             background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
             border-radius: 20px;
             color: white;
@@ -213,6 +326,28 @@
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
+        }
+        
+        .danmaku-toggle {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .toggle-btn {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
         }
         
         .modules {
@@ -630,7 +765,7 @@
             background: var(--bg-secondary);
             border-radius: 20px;
             padding: 30px;
-            max-width: 450px;
+            max-width: 500px;
             width: 90%;
             box-shadow: 0 10px 50px rgba(0,0,0,0.3);
             animation: slideUp 0.3s ease;
@@ -702,6 +837,36 @@
             border-color: var(--accent);
         }
         
+        .form-textarea {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 15px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            resize: vertical;
+            min-height: 80px;
+        }
+        
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
         .form-buttons {
             display: flex;
             gap: 10px;
@@ -736,36 +901,115 @@
             background: var(--border);
         }
         
-        /* 个人中心信息 */
-        .profile-info {
+        /* 头像上传 */
+        .avatar-upload {
             display: flex;
             align-items: center;
             gap: 20px;
-            margin-bottom: 25px;
-            padding-bottom: 25px;
-            border-bottom: 2px solid var(--border);
         }
         
-        .profile-avatar {
-            width: 80px;
-            height: 80px;
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--accent), var(--accent-hover));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2rem;
+            font-size: 2.5rem;
+            overflow: hidden;
+            border: 3px solid var(--border);
         }
         
-        .profile-details {
+        .avatar-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .avatar-upload-controls {
             flex: 1;
         }
         
-        .profile-name {
-            font-size: 1.3rem;
+        .avatar-input {
+            display: none;
+        }
+        
+        .avatar-upload-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .avatar-upload-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        
+        /* 个人中心信息 */
+        .profile-info-v2 {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .profile-avatar-v2 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            overflow: hidden;
+            border: 3px solid var(--border);
+        }
+        
+        .profile-avatar-v2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .profile-details-v2 {
+            flex: 1;
+        }
+        
+        .profile-name-v2 {
+            font-size: 1.5rem;
             font-weight: bold;
             margin-bottom: 5px;
+        }
+        
+        .profile-bio {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .profile-meta {
+            margin-top: 10px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-tag {
+            background: var(--bg-primary);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: var(--accent);
         }
         
         .profile-stats {
@@ -793,6 +1037,25 @@
             color: var(--text-secondary);
         }
         
+        .edit-profile-btn {
+            width: 100%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+        
+        .edit-profile-btn:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        
         .logout-btn {
             width: 100%;
             background: #ef4444;
@@ -809,29 +1072,6 @@
         .logout-btn:hover {
             background: #dc2626;
             transform: translateY(-2px);
-        }
-        
-        /* 页脚弹幕控制 */
-        .danmaku-toggle {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .toggle-btn {
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
-            color: var(--text-primary);
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-        }
-        
-        .toggle-btn.active {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
         }
         
         .footer {
@@ -887,6 +1127,11 @@
             to { opacity: 1; transform: translateX(0); }
         }
         
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -896,10 +1141,8 @@
                 grid-template-columns: 1fr;
             }
             
-            .header {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
+            .news-grid {
+                grid-template-columns: 1fr;
             }
             
             .profile-stats {
@@ -908,6 +1151,23 @@
             
             .danmaku-item {
                 font-size: 0.9rem;
+            }
+            
+            .nav-menu {
+                gap: 2px;
+            }
+            
+            .nav-link {
+                padding: 8px 10px;
+                font-size: 0.9rem;
+            }
+            
+            .navbar-container {
+                padding: 0 10px;
+            }
+            
+            .navbar-brand {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -918,391 +1178,421 @@
     
     <div class="toast" id="toast"></div>
     
-    <div class="container">
-        <header class="header">
-            <div class="header-left">
-                <div class="logo">
-                    🤖 阿杰的AI探索站
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="user-area">
-                    <button class="theme-toggle" onclick="toggleTheme()">
-                        <span id="theme-icon">🌙</span>
-                        <span id="theme-text">黑夜模式</span>
-                    </button>
-                    <div id="user-area-content">
-                        <button class="login-btn" onclick="openModal('login')">登录/注册</button>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="#home" onclick="scrollToSection('home')">
+                🤖 阿杰AI
+            </a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a class="nav-link" href="#news" onclick="scrollToSection('news')">📰 新闻</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">📚 AI模块 ▾</a>
+                    <div class="nav-dropdown">
+                        <div class="dropdown-item" onclick="scrollToSection('modules'); showDetails('history'); closeDropdown()">📜 发展历史</div>
+                        <div class="dropdown-item" onclick="scrollToSection('modules'); showDetails('ml'); closeDropdown()">🧠 机器学习</div>
+                        <div class="dropdown-item" onclick="scrollToSection('modules'); showDetails('dl'); closeDropdown()">🔬 深度学习</div>
+                        <div class="dropdown-item" onclick="scrollToSection('modules'); showDetails('llm'); closeDropdown()">🌐 大语言模型</div>
+                        <div class="dropdown-item" onclick="scrollToSection('modules'); showDetails('agent'); closeDropdown()">🤖 AI Agent</div>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <div id="nav-user-avatar" onclick="openProfileFromNav()"></div>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" onclick="toggleTheme()" style="border: none; background: none; width: auto;">
+                        <span id="theme-icon-nav">🌙</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <section id="home">
+            <div class="hero">
+                <h1>探索人工智能的无限可能</h1>
+                <p>从历史到未来，从理论到实践，一起开启AI学习之旅</p>
+                <div class="online-status">
+                    <span class="online-dot"></span>
+                    <span id="online-count">12</span> 位访客在线
                 </div>
             </div>
-        </header>
+        </section>
         
-        <div class="hero">
-            <h1>探索人工智能的无限可能</h1>
-            <p>从历史到未来，从理论到实践，一起开启AI学习之旅</p>
-            <div class="online-status">
-                <span class="online-dot"></span>
-                <span id="online-count">12</span> 位访客在线
+        <section id="news">
+            <div class="news-section">
+                <h2 class="section-title">📰 AI 每日要闻</h2>
+                <div class="news-grid" id="news-grid">
+                    <!-- 新闻通过JS动态生成 -->
+                </div>
+                <div class="news-source">
+                    新闻聚合来源：<a href="https://kagi.com/" target="_blank">Kagi Search</a> • 每日自动更新
+                </div>
             </div>
-        </div>
+        </section>
         
         <div class="danmaku-toggle">
             <button class="toggle-btn active" id="danmaku-toggle" onclick="toggleDanmaku()">📢 弹幕：开启</button>
         </div>
         
-        <div class="modules" id="modules-container">
-            <div class="module-card" data-module="history" onclick="showDetails('history')">
-                <div class="module-icon">📜</div>
-                <div class="module-title">发展历史</div>
-                <div class="module-desc">回顾AI 60多年的发展历程，见证技术变革</div>
-                <div class="module-card-footer">
-                    <div class="expand-hint">点击查看详情 →</div>
-                    <button class="like-btn" data-module="history" onclick="event.stopPropagation(); toggleLike('history')">
-                        ❤️ <span class="like-count">0</span>
-                    </button>
+        <section id="modules">
+            <h2 class="section-title">📚 AI 知识模块</h2>
+            <div class="modules" id="modules-container">
+                <div class="module-card" data-module="history" onclick="showDetails('history')">
+                    <div class="module-icon">📜</div>
+                    <div class="module-title">发展历史</div>
+                    <div class="module-desc">回顾AI 60多年的发展历程，见证技术变革</div>
+                    <div class="module-card-footer">
+                        <div class="expand-hint">点击查看详情 →</div>
+                        <button class="like-btn" data-module="history" onclick="event.stopPropagation(); toggleLike('history')">
+                            ❤️ <span class="like-count">0</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="module-card" data-module="ml" onclick="showDetails('ml')">
+                    <div class="module-icon">🧠</div>
+                    <div class="module-title">机器学习</div>
+                    <div class="module-desc">让计算机从数据中学习，发现隐藏规律</div>
+                    <div class="module-card-footer">
+                        <div class="expand-hint">点击查看详情 →</div>
+                        <button class="like-btn" data-module="ml" onclick="event.stopPropagation(); toggleLike('ml')">
+                            ❤️ <span class="like-count">0</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="module-card" data-module="dl" onclick="showDetails('dl')">
+                    <div class="module-icon">🔬</div>
+                    <div class="module-title">深度学习</div>
+                    <div class="module-desc">基于神经网络的学习方法，突破AI瓶颈</div>
+                    <div class="module-card-footer">
+                        <div class="expand-hint">点击查看详情 →</div>
+                        <button class="like-btn" data-module="dl" onclick="event.stopPropagation(); toggleLike('dl')">
+                            ❤️ <span class="like-count">0</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="module-card" data-module="llm" onclick="showDetails('llm')">
+                    <div class="module-icon">🌐</div>
+                    <div class="module-title">大语言模型</div>
+                    <div class="module-desc">GPT、LLaMA等巨型模型，理解与生成人类语言</div>
+                    <div class="module-card-footer">
+                        <div class="expand-hint">点击查看详情 →</div>
+                        <button class="like-btn" data-module="llm" onclick="event.stopPropagation(); toggleLike('llm')">
+                            ❤️ <span class="like-count">0</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="module-card" data-module="agent" onclick="showDetails('agent')">
+                    <div class="module-icon">🤖</div>
+                    <div class="module-title">AI Agent</div>
+                    <div class="module-desc">感知环境、做出决策、执行行动的智能体</div>
+                    <div class="module-card-footer">
+                        <div class="expand-hint">点击查看详情 →</div>
+                        <button class="like-btn" data-module="agent" onclick="event.stopPropagation(); toggleLike('agent')">
+                            ❤️ <span class="like-count">0</span>
+                        </button>
+                    </div>
                 </div>
             </div>
             
-            <div class="module-card" data-module="ml" onclick="showDetails('ml')">
-                <div class="module-icon">🧠</div>
-                <div class="module-title">机器学习</div>
-                <div class="module-desc">让计算机从数据中学习，发现隐藏规律</div>
-                <div class="module-card-footer">
-                    <div class="expand-hint">点击查看详情 →</div>
-                    <button class="like-btn" data-module="ml" onclick="event.stopPropagation(); toggleLike('ml')">
-                        ❤️ <span class="like-count">0</span>
-                    </button>
+            <div id="details-history" class="module-details">
+                <div class="details-header">
+                    <h2>📜 人工智能发展历史</h2>
+                    <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
+                </div>
+                <div class="details-content">
+                    <p>人工智能（Artificial Intelligence，AI）的概念最早可以追溯到1956年的达特茅斯会议，由约翰·麦卡锡等人提出。从那时起，AI经历了多次繁荣与寒冬的交替。</p>
+                    
+                    <h3>关键里程碑</h3>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">1956</div>
+                            <div>达特茅斯会议，AI正式诞生</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">1958</div>
+                            <div>感知机（Perceptron）算法提出</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">1966</div>
+                            <div>ELIZA聊天机器人诞生</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">1980s</div>
+                            <div>专家系统兴起，AI第一次商业化浪潮</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">1997</div>
+                            <div>深蓝击败国际象棋世界冠军卡斯帕罗夫</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2012</div>
+                            <div>AlexNet在ImageNet竞赛中夺冠，深度学习革命开始</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2016</div>
+                            <div>AlphaGo击败围棋世界冠军李世石</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2017</div>
+                            <div>Transformer架构提出，奠定大模型基础</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2022</div>
+                            <div>ChatGPT发布，AI进入新时代</div>
+                        </div>
+                    </div>
+                    
+                    <div class="comments-section" id="comments-history">
+                        <h3 class="comments-title">💬 讨论区 (<span class="comment-count">0</span>)</h3>
+                        <div class="comment-form">
+                            <textarea class="comment-input" placeholder="分享你的看法..." id="comment-input-history"></textarea>
+                            <button class="submit-comment" onclick="submitComment('history')">发布评论</button>
+                        </div>
+                        <ul class="comment-list" id="comment-list-history"></ul>
+                    </div>
                 </div>
             </div>
             
-            <div class="module-card" data-module="dl" onclick="showDetails('dl')">
-                <div class="module-icon">🔬</div>
-                <div class="module-title">深度学习</div>
-                <div class="module-desc">基于神经网络的学习方法，突破AI瓶颈</div>
-                <div class="module-card-footer">
-                    <div class="expand-hint">点击查看详情 →</div>
-                    <button class="like-btn" data-module="dl" onclick="event.stopPropagation(); toggleLike('dl')">
-                        ❤️ <span class="like-count">0</span>
-                    </button>
+            <div id="details-ml" class="module-details">
+                <div class="details-header">
+                    <h2>🧠 机器学习</h2>
+                    <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
+                </div>
+                <div class="details-content">
+                    <p>机器学习（Machine Learning，ML）是AI的核心子领域，它使计算机能够从数据中学习，而无需显式编程。通过分析大量数据，机器学习算法可以发现模式、做出预测和决策。</p>
+                    
+                    <h3>主要类型</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <div class="resource-title">监督学习</div>
+                            <div class="resource-desc">使用标注数据训练模型，如分类和回归问题</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">无监督学习</div>
+                            <div class="resource-desc">从未标注数据中发现隐藏结构，如聚类和降维</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">强化学习</div>
+                            <div class="resource-desc">通过与环境交互获得奖励来学习最优策略</div>
+                        </li>
+                    </ul>
+                    
+                    <h3>📚 学习资源</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <div class="resource-title">吴恩达《机器学习》课程</div>
+                            <div class="resource-desc">Coursera经典入门课程，深入浅出讲解ML基础</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">《Python机器学习》</div>
+                            <div class="resource-desc">Sebastian Raschka著，实战导向的Python ML教程</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">Kaggle实战项目</div>
+                            <div class="resource-desc">参与竞赛和项目，在实践中提升技能</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">Scikit-learn官方文档</div>
+                            <div class="resource-desc">Python机器学习库的权威文档和教程</div>
+                        </li>
+                    </ul>
+                    
+                    <div class="comments-section" id="comments-ml">
+                        <h3 class="comments-title">💬 讨论区 (<span class="comment-count">0</span>)</h3>
+                        <div class="comment-form">
+                            <textarea class="comment-input" placeholder="分享你的看法..." id="comment-input-ml"></textarea>
+                            <button class="submit-comment" onclick="submitComment('ml')">发布评论</button>
+                        </div>
+                        <ul class="comment-list" id="comment-list-ml"></ul>
+                    </div>
                 </div>
             </div>
             
-            <div class="module-card" data-module="llm" onclick="showDetails('llm')">
-                <div class="module-icon">🌐</div>
-                <div class="module-title">大语言模型</div>
-                <div class="module-desc">GPT、LLaMA等巨型模型，理解与生成人类语言</div>
-                <div class="module-card-footer">
-                    <div class="expand-hint">点击查看详情 →</div>
-                    <button class="like-btn" data-module="llm" onclick="event.stopPropagation(); toggleLike('llm')">
-                        ❤️ <span class="like-count">0</span>
-                    </button>
+            <div id="details-dl" class="module-details">
+                <div class="details-header">
+                    <h2>🔬 深度学习</h2>
+                    <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
+                </div>
+                <div class="details-content">
+                    <p>深度学习（Deep Learning，DL）是机器学习的一个分支，它基于人工神经网络，特别是深层神经网络。深度学习在图像识别、语音识别、自然语言处理等领域取得了突破性进展。</p>
+                    
+                    <h3>核心概念</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <div class="resource-title">神经网络</div>
+                            <div class="resource-desc">模仿人脑神经元结构的计算模型</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">卷积神经网络（CNN）</div>
+                            <div class="resource-desc">专门处理图像数据的网络结构</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">循环神经网络（RNN）</div>
+                            <div class="resource-desc">处理序列数据的网络，如文本和时间序列</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">Transformer</div>
+                            <div class="resource-desc">基于注意力机制的革命性架构</div>
+                        </li>
+                    </ul>
+                    
+                    <h3>📚 学习资源</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <div class="resource-title">《深度学习》花书</div>
+                            <div class="resource-desc">Ian Goodfellow等著，深度学习领域的圣经</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">PyTorch官方教程</div>
+                            <div class="resource-desc">深度学习框架PyTorch的官方学习路径</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">Fast.ai实战课程</div>
+                            <div class="resource-desc">自顶向下的深度学习教学方法，快速上手</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">CS231n斯坦福课程</div>
+                            <div class="resource-desc">计算机视觉与深度学习的经典课程</div>
+                        </li>
+                    </ul>
+                    
+                    <div class="comments-section" id="comments-dl">
+                        <h3 class="comments-title">💬 讨论区 (<span class="comment-count">0</span>)</h3>
+                        <div class="comment-form">
+                            <textarea class="comment-input" placeholder="分享你的看法..." id="comment-input-dl"></textarea>
+                            <button class="submit-comment" onclick="submitComment('dl')">发布评论</button>
+                        </div>
+                        <ul class="comment-list" id="comment-list-dl"></ul>
+                    </div>
                 </div>
             </div>
             
-            <div class="module-card" data-module="agent" onclick="showDetails('agent')">
-                <div class="module-icon">🤖</div>
-                <div class="module-title">AI Agent</div>
-                <div class="module-desc">感知环境、做出决策、执行行动的智能体</div>
-                <div class="module-card-footer">
-                    <div class="expand-hint">点击查看详情 →</div>
-                    <button class="like-btn" data-module="agent" onclick="event.stopPropagation(); toggleLike('agent')">
-                        ❤️ <span class="like-count">0</span>
-                    </button>
+            <div id="details-llm" class="module-details">
+                <div class="details-header">
+                    <h2>🌐 大语言模型</h2>
+                    <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
+                </div>
+                <div class="details-content">
+                    <p>大语言模型（Large Language Models，LLM）是基于Transformer架构的巨型神经网络，拥有数千亿参数。它们通过在海量文本数据上预训练，能够理解和生成人类语言，展现出惊人的能力。</p>
+                    
+                    <h3>代表性模型</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <div class="resource-title">GPT系列</div>
+                            <div class="resource-desc">OpenAI开发的生成式预训练Transformer模型</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">LLaMA</div>
+                            <div class="resource-desc">Meta开源的大语言模型系列</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">Claude</div>
+                            <div class="resource-desc">Anthropic开发的注重安全性的大模型</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">文心一言、通义千问</div>
+                            <div class="resource-desc">国内领先的大语言模型</div>
+                        </li>
+                    </ul>
+                    
+                    <h3>📚 学习资源</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <div class="resource-title">《Attention Is All You Need》论文</div>
+                            <div class="resource-desc">Transformer架构的原始论文，必读经典</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">Hugging Face Transformers</div>
+                            <div class="resource-desc">最流行的NLP库，提供海量预训练模型</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">OpenAI API开发指南</div>
+                            <div class="resource-desc">如何使用GPT API构建应用</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">LangChain框架</div>
+                            <div class="resource-desc">构建LLM应用的强大框架</div>
+                        </li>
+                    </ul>
+                    
+                    <div class="comments-section" id="comments-llm">
+                        <h3 class="comments-title">💬 讨论区 (<span class="comment-count">0</span>)</h3>
+                        <div class="comment-form">
+                            <textarea class="comment-input" placeholder="分享你的看法..." id="comment-input-llm"></textarea>
+                            <button class="submit-comment" onclick="submitComment('llm')">发布评论</button>
+                        </div>
+                        <ul class="comment-list" id="comment-list-llm"></ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div id="details-history" class="module-details">
-            <div class="details-header">
-                <h2>📜 人工智能发展历史</h2>
-                <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
-            </div>
-            <div class="details-content">
-                <p>人工智能（Artificial Intelligence，AI）的概念最早可以追溯到1956年的达特茅斯会议，由约翰·麦卡锡等人提出。从那时起，AI经历了多次繁荣与寒冬的交替。</p>
-                
-                <h3>关键里程碑</h3>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-year">1956</div>
-                        <div>达特茅斯会议，AI正式诞生</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1958</div>
-                        <div>感知机（Perceptron）算法提出</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1966</div>
-                        <div>ELIZA聊天机器人诞生</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1980s</div>
-                        <div>专家系统兴起，AI第一次商业化浪潮</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">1997</div>
-                        <div>深蓝击败国际象棋世界冠军卡斯帕罗夫</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">2012</div>
-                        <div>AlexNet在ImageNet竞赛中夺冠，深度学习革命开始</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">2016</div>
-                        <div>AlphaGo击败围棋世界冠军李世石</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">2017</div>
-                        <div>Transformer架构提出，奠定大模型基础</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-year">2022</div>
-                        <div>ChatGPT发布，AI进入新时代</div>
+            
+            <div id="details-agent" class="module-details">
+                <div class="details-header">
+                    <h2>🤖 AI Agent</h2>
+                    <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
+                </div>
+                <div class="details-content">
+                    <p>AI Agent（人工智能智能体）是能够感知环境、做出决策并执行行动的智能系统。与传统的被动式AI不同，Agent具有自主性和目标导向性，能够主动与环境交互，完成复杂任务。</p>
+                    
+                    <h3>核心能力</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <div class="resource-title">感知能力</div>
+                            <div class="resource-desc">通过传感器或API获取环境信息</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">决策能力</div>
+                            <div class="resource-desc">基于感知信息和目标做出最优决策</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">执行能力</div>
+                            <div class="resource-desc">通过工具或API执行具体行动</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">学习能力</div>
+                            <div class="resource-desc">从经验中不断改进性能</div>
+                        </li>
+                    </ul>
+                    
+                    <h3>📚 学习资源</h3>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <div class="resource-title">《Reinforcement Learning》</div>
+                            <div class="resource-desc">Sutton & Barto著，强化学习领域的圣经</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">LangChain Agents文档</div>
+                            <div class="resource-desc">构建LLM Agent的完整指南</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">AutoGPT开源项目</div>
+                            <div class="resource-desc">自主AI Agent的先驱项目</div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-title">BabyAGI</div>
+                            <div class="resource-desc">任务驱动的AI Agent实现</div>
+                        </li>
+                    </ul>
+                    
+                    <div class="comments-section" id="comments-agent">
+                        <h3 class="comments-title">💬 讨论区 (<span class="comment-count">0</span>)</h3>
+                        <div class="comment-form">
+                            <textarea class="comment-input" placeholder="分享你的看法..." id="comment-input-agent"></textarea>
+                            <button class="submit-comment" onclick="submitComment('agent')">发布评论</button>
+                        </div>
+                        <ul class="comment-list" id="comment-list-agent"></ul>
                     </div>
                 </div>
-                
-                <div class="comments-section" id="comments-history">
-                    <h3 class="comments-title">💬 讨论区 (<span class="comment-count">0</span>)</h3>
-                    <div class="comment-form">
-                        <textarea class="comment-input" placeholder="分享你的看法..." id="comment-input-history"></textarea>
-                        <button class="submit-comment" onclick="submitComment('history')">发布评论</button>
-                    </div>
-                    <ul class="comment-list" id="comment-list-history"></ul>
-                </div>
             </div>
-        </div>
-        
-        <div id="details-ml" class="module-details">
-            <div class="details-header">
-                <h2>🧠 机器学习</h2>
-                <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
-            </div>
-            <div class="details-content">
-                <p>机器学习（Machine Learning，ML）是AI的核心子领域，它使计算机能够从数据中学习，而无需显式编程。通过分析大量数据，机器学习算法可以发现模式、做出预测和决策。</p>
-                
-                <h3>主要类型</h3>
-                <ul class="resource-list">
-                    <li class="resource-item">
-                        <div class="resource-title">监督学习</div>
-                        <div class="resource-desc">使用标注数据训练模型，如分类和回归问题</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">无监督学习</div>
-                        <div class="resource-desc">从未标注数据中发现隐藏结构，如聚类和降维</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">强化学习</div>
-                        <div class="resource-desc">通过与环境交互获得奖励来学习最优策略</div>
-                    </li>
-                </ul>
-                
-                <h3>📚 学习资源</h3>
-                <ul class="resource-list">
-                    <li class="resource-item">
-                        <div class="resource-title">吴恩达《机器学习》课程</div>
-                        <div class="resource-desc">Coursera经典入门课程，深入浅出讲解ML基础</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">《Python机器学习》</div>
-                        <div class="resource-desc">Sebastian Raschka著，实战导向的Python ML教程</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">Kaggle实战项目</div>
-                        <div class="resource-desc">参与竞赛和项目，在实践中提升技能</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">Scikit-learn官方文档</div>
-                        <div class="resource-desc">Python机器学习库的权威文档和教程</div>
-                    </li>
-                </ul>
-                
-                <div class="comments-section" id="comments-ml">
-                    <h3 class="comments-title">💬 讨论区 (<span class="comment-count">0</span>)</h3>
-                    <div class="comment-form">
-                        <textarea class="comment-input" placeholder="分享你的看法..." id="comment-input-ml"></textarea>
-                        <button class="submit-comment" onclick="submitComment('ml')">发布评论</button>
-                    </div>
-                    <ul class="comment-list" id="comment-list-ml"></ul>
-                </div>
-            </div>
-        </div>
-        
-        <div id="details-dl" class="module-details">
-            <div class="details-header">
-                <h2>🔬 深度学习</h2>
-                <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
-            </div>
-            <div class="details-content">
-                <p>深度学习（Deep Learning，DL）是机器学习的一个分支，它基于人工神经网络，特别是深层神经网络。深度学习在图像识别、语音识别、自然语言处理等领域取得了突破性进展。</p>
-                
-                <h3>核心概念</h3>
-                <ul class="resource-list">
-                    <li class="resource-item">
-                        <div class="resource-title">神经网络</div>
-                        <div class="resource-desc">模仿人脑神经元结构的计算模型</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">卷积神经网络（CNN）</div>
-                        <div class="resource-desc">专门处理图像数据的网络结构</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">循环神经网络（RNN）</div>
-                        <div class="resource-desc">处理序列数据的网络，如文本和时间序列</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">Transformer</div>
-                        <div class="resource-desc">基于注意力机制的革命性架构</div>
-                    </li>
-                </ul>
-                
-                <h3>📚 学习资源</h3>
-                <ul class="resource-list">
-                    <li class="resource-item">
-                        <div class="resource-title">《深度学习》花书</div>
-                        <div class="resource-desc">Ian Goodfellow等著，深度学习领域的圣经</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">PyTorch官方教程</div>
-                        <div class="resource-desc">深度学习框架PyTorch的官方学习路径</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">Fast.ai实战课程</div>
-                        <div class="resource-desc">自顶向下的深度学习教学方法，快速上手</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">CS231n斯坦福课程</div>
-                        <div class="resource-desc">计算机视觉与深度学习的经典课程</div>
-                    </li>
-                </ul>
-                
-                <div class="comments-section" id="comments-dl">
-                    <h3 class="comments-title">💬 讨论区 (<span class="comment-count">0</span>)</h3>
-                    <div class="comment-form">
-                        <textarea class="comment-input" placeholder="分享你的看法..." id="comment-input-dl"></textarea>
-                        <button class="submit-comment" onclick="submitComment('dl')">发布评论</button>
-                    </div>
-                    <ul class="comment-list" id="comment-list-dl"></ul>
-                </div>
-            </div>
-        </div>
-        
-        <div id="details-llm" class="module-details">
-            <div class="details-header">
-                <h2>🌐 大语言模型</h2>
-                <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
-            </div>
-            <div class="details-content">
-                <p>大语言模型（Large Language Models，LLM）是基于Transformer架构的巨型神经网络，拥有数千亿参数。它们通过在海量文本数据上预训练，能够理解和生成人类语言，展现出惊人的能力。</p>
-                
-                <h3>代表性模型</h3>
-                <ul class="resource-list">
-                    <li class="resource-item">
-                        <div class="resource-title">GPT系列</div>
-                        <div class="resource-desc">OpenAI开发的生成式预训练Transformer模型</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">LLaMA</div>
-                        <div class="resource-desc">Meta开源的大语言模型系列</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">Claude</div>
-                        <div class="resource-desc">Anthropic开发的注重安全性的大模型</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">文心一言、通义千问</div>
-                        <div class="resource-desc">国内领先的大语言模型</div>
-                    </li>
-                </ul>
-                
-                <h3>📚 学习资源</h3>
-                <ul class="resource-list">
-                    <li class="resource-item">
-                        <div class="resource-title">《Attention Is All You Need》论文</div>
-                        <div class="resource-desc">Transformer架构的原始论文，必读经典</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">Hugging Face Transformers</div>
-                        <div class="resource-desc">最流行的NLP库，提供海量预训练模型</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">OpenAI API开发指南</div>
-                        <div class="resource-desc">如何使用GPT API构建应用</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">LangChain框架</div>
-                        <div class="resource-desc">构建LLM应用的强大框架</div>
-                    </li>
-                </ul>
-                
-                <div class="comments-section" id="comments-llm">
-                    <h3 class="comments-title">💬 讨论区 (<span class="comment-count">0</span>)</h3>
-                    <div class="comment-form">
-                        <textarea class="comment-input" placeholder="分享你的看法..." id="comment-input-llm"></textarea>
-                        <button class="submit-comment" onclick="submitComment('llm')">发布评论</button>
-                    </div>
-                    <ul class="comment-list" id="comment-list-llm"></ul>
-                </div>
-            </div>
-        </div>
-        
-        <div id="details-agent" class="module-details">
-            <div class="details-header">
-                <h2>🤖 AI Agent</h2>
-                <button class="close-btn" onclick="closeDetails()">✕ 关闭</button>
-            </div>
-            <div class="details-content">
-                <p>AI Agent（人工智能智能体）是能够感知环境、做出决策并执行行动的智能系统。与传统的被动式AI不同，Agent具有自主性和目标导向性，能够主动与环境交互，完成复杂任务。</p>
-                
-                <h3>核心能力</h3>
-                <ul class="resource-list">
-                    <li class="resource-item">
-                        <div class="resource-title">感知能力</div>
-                        <div class="resource-desc">通过传感器或API获取环境信息</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">决策能力</div>
-                        <div class="resource-desc">基于感知信息和目标做出最优决策</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">执行能力</div>
-                        <div class="resource-desc">通过工具或API执行具体行动</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">学习能力</div>
-                        <div class="resource-desc">从经验中不断改进性能</div>
-                    </li>
-                </ul>
-                
-                <h3>📚 学习资源</h3>
-                <ul class="resource-list">
-                    <li class="resource-item">
-                        <div class="resource-title">《Reinforcement Learning》</div>
-                        <div class="resource-desc">Sutton & Barto著，强化学习领域的圣经</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">LangChain Agents文档</div>
-                        <div class="resource-desc">构建LLM Agent的完整指南</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">AutoGPT开源项目</div>
-                        <div class="resource-desc">自主AI Agent的先驱项目</div>
-                    </li>
-                    <li class="resource-item">
-                        <div class="resource-title">BabyAGI</div>
-                        <div class="resource-desc">任务驱动的AI Agent实现</div>
-                    </li>
-                </ul>
-                
-                <div class="comments-section" id="comments-agent">
-                    <h3 class="comments-title">💬 讨论区 (<span class="comment-count">0</span>)</h3>
-                    <div class="comment-form">
-                        <textarea class="comment-input" placeholder="分享你的看法..." id="comment-input-agent"></textarea>
-                        <button class="submit-comment" onclick="submitComment('agent')">发布评论</button>
-                    </div>
-                    <ul class="comment-list" id="comment-list-agent"></ul>
-                </div>
-            </div>
-        </div>
+        </section>
         
         <footer class="footer">
             <p>© 2024 阿杰的AI探索站 | 持续更新中...</p>
@@ -1362,6 +1652,54 @@
         </div>
     </div>
     
+    <!-- 编辑个人资料弹窗 -->
+    <div class="modal-overlay" id="edit-profile-modal" onclick="closeModalOnBackdrop(event, 'edit-profile-modal')">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title">编辑个人资料</div>
+                <div class="modal-close" onclick="closeModal('edit-profile-modal')">✕</div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">头像</label>
+                <div class="avatar-upload">
+                    <div class="avatar-preview" id="avatar-preview">
+                        <span id="avatar-preview-text">?</span>
+                    </div>
+                    <div class="avatar-upload-controls">
+                        <input type="file" id="avatar-input" class="avatar-input" accept="image/*" onchange="handleAvatarUpload(event)">
+                        <label for="avatar-input" class="avatar-upload-btn">选择图片</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">性别</label>
+                <div class="radio-group">
+                    <label class="radio-item">
+                        <input type="radio" name="gender" value="male" onchange="updateGenderSelection()"> 男
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="gender" value="female" onchange="updateGenderSelection()"> 女
+                    </label>
+                    <label class="radio-item">
+                        <input type="radio" name="gender" value="secret" checked onchange="updateGenderSelection()"> 保密
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">年龄</label>
+                <input type="number" class="form-input" id="profile-age" placeholder="输入年龄" min="10" max="100">
+            </div>
+            <div class="form-group">
+                <label class="form-label">个人简介</label>
+                <textarea class="form-textarea" id="profile-bio" placeholder="介绍一下自己吧..."></textarea>
+            </div>
+            <div class="form-buttons">
+                <button class="form-btn" onclick="saveProfile()">保存更改</button>
+                <button class="form-btn secondary" onclick="closeModal('edit-profile-modal')">取消</button>
+            </div>
+        </div>
+    </div>
+    
     <!-- 个人中心弹窗 -->
     <div class="modal-overlay" id="profile-modal" onclick="closeModalOnBackdrop(event, 'profile-modal')">
         <div class="modal-content">
@@ -1369,11 +1707,16 @@
                 <div class="modal-title">个人中心</div>
                 <div class="modal-close" onclick="closeModal('profile-modal')">✕</div>
             </div>
-            <div class="profile-info">
-                <div class="profile-avatar" id="profile-avatar">?</div>
-                <div class="profile-details">
-                    <div class="profile-name" id="profile-name">未登录</div>
-                    <div style="color: var(--text-secondary); font-size: 0.9rem;">AI探索者</div>
+            <div class="profile-info-v2">
+                <div class="profile-avatar-v2" id="profile-avatar-v2">
+                    <span id="profile-avatar-text">?</span>
+                </div>
+                <div class="profile-details-v2">
+                    <div class="profile-name-v2" id="profile-name-v2">未登录</div>
+                    <div class="profile-bio" id="profile-bio-display">AI探索者</div>
+                    <div class="profile-meta" id="profile-meta">
+                        <!-- 动态生成 -->
+                    </div>
                 </div>
             </div>
             <div class="profile-stats">
@@ -1386,6 +1729,7 @@
                     <div class="stat-label">点赞文章</div>
                 </div>
             </div>
+            <button class="edit-profile-btn" onclick="openEditProfile()">编辑资料</button>
             <button class="logout-btn" onclick="handleLogout()">退出登录</button>
         </div>
     </div>
@@ -1394,6 +1738,50 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     
     <script>
+        // AI 新闻数据（模拟每日更新，不同日期显示不同新闻）
+        const aiNews = [
+            {
+                date: "今天",
+                title: "OpenAI发布GPT-4o，多模态能力大幅提升",
+                desc: "OpenAI最新推出的GPT-4o在语音识别、图像处理和实时交互方面带来全新体验，响应速度提升两倍。"
+            },
+            {
+                date: "昨天",
+                title: "Meta开源Llama 3，性能接近GPT-4",
+                desc: "Meta发布的最新Llama 3模型在多项基准测试中表现出色，开源社区反响热烈。"
+            },
+            {
+                date: "2天前",
+                title: "AI Agent成今年最热门方向，多家大厂布局",
+                desc: "自主智能体能够自动完成复杂任务，被认为是AI下一个重要里程碑。"
+            },
+            {
+                date: "3天前",
+                title: "Google DeepMind发布Gemini 1.5 Pro",
+                desc: "上下文窗口扩展到百万token，能够处理超长文档和视频内容分析。"
+            },
+            {
+                date: "4天前",
+                title: "AI生成内容监管政策出台",
+                desc: "各国开始研究AI内容标注和版权保护，行业规范逐步形成。"
+            },
+            {
+                date: "5天前",
+                title: "端侧大模型成为新趋势",
+                desc: "在手机本地运行大模型成为可能，隐私保护和响应速度优势明显。"
+            },
+            {
+                date: "一周前",
+                title: "多模态AI成为研究热点",
+                desc: "融合文本、图像、音频、视频的统一模型架构成为主流方向。"
+            },
+            {
+                date: "一周前",
+                title: "AI助力科学发现，蛋白质结构预测再突破",
+                desc: "深度学习方法加速新药研发，多家药企合作取得重要进展。"
+            }
+        ];
+        
         // 粒子背景配置
         particlesJS('particles-js', {
             particles: {
@@ -1441,13 +1829,11 @@
             
             if (isDark) {
                 body.removeAttribute('data-theme');
-                document.getElementById('theme-icon').textContent = '🌙';
-                document.getElementById('theme-text').textContent = '黑夜模式';
+                document.getElementById('theme-icon-nav').textContent = '🌙';
                 localStorage.setItem('theme', 'light');
             } else {
                 body.setAttribute('data-theme', 'dark');
-                document.getElementById('theme-icon').textContent = '☀️';
-                document.getElementById('theme-text').textContent = '白天模式';
+                document.getElementById('theme-icon-nav').textContent = '☀️';
                 localStorage.setItem('theme', 'dark');
             }
         }
@@ -1459,9 +1845,55 @@
             
             if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
                 document.body.setAttribute('data-theme', 'dark');
-                document.getElementById('theme-icon').textContent = '☀️';
-                document.getElementById('theme-text').textContent = '白天模式';
+                document.getElementById('theme-icon-nav').textContent = '☀️';
+            } else {
+                document.getElementById('theme-icon-nav').textContent = '🌙';
             }
+        }
+        
+        // 滚动到指定区域
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        // 关闭下拉菜单
+        function closeDropdown() {
+            // 点击后自动关闭，CSS hover在移动端可能有问题，这里留空
+        }
+        
+        // 从导航打开个人中心
+        function openProfileFromNav() {
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                openModal('profile-modal');
+            } else {
+                openModal('login-modal');
+            }
+        }
+        
+        // 生成每日新闻
+        function generateDailyNews() {
+            const container = document.getElementById('news-grid');
+            const today = new Date();
+            const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const startIndex = dayOfYear % aiNews.length;
+            
+            // 每天显示4条新闻，轮换显示
+            const selectedNews = [];
+            for (let i = 0; i < 4; i++) {
+                selectedNews.push(aiNews[(startIndex + i) % aiNews.length]);
+            }
+            
+            container.innerHTML = selectedNews.map(news => `
+                <div class="news-card">
+                    <div class="news-date">${news.date}</div>
+                    <div class="news-title">${news.title}</div>
+                    <div class="news-desc">${news.desc}</div>
+                </div>
+            `).join('');
         }
         
         // 模块展开关闭
@@ -1653,8 +2085,20 @@
             localStorage.setItem('ai_likes', JSON.stringify(likes));
         }
         
+        function getProfileData() {
+            const profile = localStorage.getItem('ai_profile');
+            return profile ? JSON.parse(profile) : {};
+        }
+        
+        function saveProfileData(profile) {
+            localStorage.setItem('ai_profile', JSON.stringify(profile));
+        }
+        
         function openModal(modalId) {
             document.getElementById(`${modalId}-modal`).classList.add('active');
+            if (modalId === 'edit-profile') {
+                loadProfileToForm();
+            }
         }
         
         function closeModal(modalId) {
@@ -1690,6 +2134,7 @@
             
             setCurrentUser(users[username]);
             updateUserArea();
+            updateNavUserAvatar();
             closeModal('login-modal');
             showToast(`欢迎回来，${username}！🎉`);
             addDanmaku(`${username} 刚刚登录了阿杰AI探索站 👋`);
@@ -1732,43 +2177,157 @@
             saveUsers(users);
             setCurrentUser(newUser);
             updateUserArea();
+            updateNavUserAvatar();
             closeModal('register-modal');
             showToast(`注册成功！欢迎加入，${username}！🎉`);
             addDanmaku(`新用户 ${username} 加入了AI探索站 🎉`);
         }
         
+        // 头像上传处理
+        function handleAvatarUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const avatarData = e.target.result;
+                const preview = document.getElementById('avatar-preview');
+                preview.innerHTML = `<img src="${avatarData}" alt="头像">`;
+                window._pendingAvatar = avatarData;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function updateGenderSelection() {
+            // 只是为了触发重新获取选中值
+        }
+        
+        function getSelectedGender() {
+            const radios = document.getElementsByName('gender');
+            for (let radio of radios) {
+                if (radio.checked) {
+                    return radio.value;
+                }
+            }
+            return 'secret';
+        }
+        
+        function loadProfileToForm() {
+            const profile = getProfileData();
+            const currentUser = getCurrentUser();
+            if (!currentUser) return;
+            
+            document.getElementById('profile-age').value = profile.age || '';
+            document.getElementById('profile-bio').value = profile.bio || '';
+            
+            if (profile.gender) {
+                const radios = document.getElementsByName('gender');
+                for (let radio of radios) {
+                    radio.checked = (radio.value === profile.gender);
+                }
+            }
+            
+            if (profile.avatar) {
+                const preview = document.getElementById('avatar-preview');
+                preview.innerHTML = `<img src="${profile.avatar}" alt="头像">`;
+                window._pendingAvatar = profile.avatar;
+            } else {
+                const firstChar = currentUser.username[0].toUpperCase();
+                document.getElementById('avatar-preview-text').textContent = firstChar;
+                window._pendingAvatar = null;
+            }
+        }
+        
+        function saveProfile() {
+            const profile = {
+                gender: getSelectedGender(),
+                age: document.getElementById('profile-age').value,
+                bio: document.getElementById('profile-bio').value.trim()
+            };
+            
+            if (window._pendingAvatar) {
+                profile.avatar = window._pendingAvatar;
+            }
+            
+            saveProfileData(profile);
+            updateProfileDisplay();
+            updateNavUserAvatar();
+            closeModal('edit-profile-modal');
+            closeModal('profile-modal');
+            showToast('个人资料已保存！✅');
+        }
+        
+        function openEditProfile() {
+            closeModal('profile-modal');
+            setTimeout(() => openModal('edit-profile-modal'), 300);
+        }
+        
+        function updateProfileDisplay() {
+            const currentUser = getCurrentUser();
+            const profile = getProfileData();
+            
+            if (!currentUser) return;
+            
+            document.getElementById('profile-name-v2').textContent = currentUser.username;
+            
+            // 更新头像
+            const avatarContainer = document.getElementById('profile-avatar-v2');
+            if (profile.avatar) {
+                avatarContainer.innerHTML = `<img src="${profile.avatar}" alt="${currentUser.username}">`;
+            } else {
+                const firstChar = currentUser.username[0].toUpperCase();
+                document.getElementById('profile-avatar-text').textContent = firstChar;
+                avatarContainer.innerHTML = '<span id="profile-avatar-text">' + firstChar + '</span>';
+            }
+            
+            // 更新简介
+            document.getElementById('profile-bio-display').textContent = profile.bio || 'AI探索者';
+            
+            // 更新元数据标签
+            const metaContainer = document.getElementById('profile-meta');
+            let metaHtml = '';
+            if (profile.gender && profile.gender !== 'secret') {
+                const genderMap = { male: '男', female: '女' };
+                metaHtml += `<span class="meta-tag">${genderMap[profile.gender]}</span>`;
+            }
+            if (profile.age) {
+                metaHtml += `<span class="meta-tag">${profile.age} 岁</span>`;
+            }
+            metaContainer.innerHTML = metaHtml;
+        }
+        
+        function updateNavUserAvatar() {
+            const currentUser = getCurrentUser();
+            const container = document.getElementById('nav-user-avatar');
+            const profile = getProfileData();
+            
+            if (currentUser) {
+                if (profile.avatar) {
+                    container.innerHTML = `<img src="${profile.avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+                } else {
+                    const firstChar = currentUser.username[0].toUpperCase();
+                    container.innerHTML = `${firstChar}`;
+                }
+                container.className = 'user-avatar-nav';
+                container.onclick = function() { openModal('profile-modal'); };
+            } else {
+                container.innerHTML = `<button style="background: var(--accent);color: white;border: none;padding: 8px 15px;border-radius: 20px;cursor: pointer;font-size: 0.9rem;">登录</button>`;
+                container.className = '';
+                container.onclick = function() { openModal('login'); };
+            }
+        }
+        
         function handleLogout() {
             localStorage.removeItem('ai_current_user');
             updateUserArea();
+            updateNavUserAvatar();
             closeModal('profile-modal');
             showToast('已退出登录');
         }
         
         function updateUserArea() {
-            const currentUser = getCurrentUser();
-            const container = document.getElementById('user-area-content');
-            
-            if (currentUser) {
-                const firstChar = currentUser.username[0].toUpperCase();
-                container.innerHTML = `
-                    <div class="user-avatar" onclick="openModal('profile-modal')">${firstChar}</div>
-                `;
-                updateProfile();
-            } else {
-                container.innerHTML = `
-                    <button class="login-btn" onclick="openModal('login')">登录/注册</button>
-                `;
-            }
-        }
-        
-        function updateProfile() {
-            const currentUser = getCurrentUser();
-            if (!currentUser) return;
-            
-            document.getElementById('profile-name').textContent = currentUser.username;
-            document.getElementById('profile-avatar').textContent = currentUser.username[0].toUpperCase();
-            
             updateProfileStats();
+            updateProfileDisplay();
         }
         
         function updateProfileStats() {
@@ -1915,11 +2474,13 @@
             
             // 更新用户区域
             updateUserArea();
+            updateNavUserAvatar();
         }
         
         // 页面加载初始化
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
+            generateDailyNews();
             initVisitorCount();
             loadExistingData();
             updateOnlineCount();
@@ -1938,7 +2499,7 @@
                 });
             }, { threshold: 0.1 });
             
-            document.querySelectorAll('.module-card').forEach(card => {
+            document.querySelectorAll('.module-card, .news-card').forEach(card => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
                 card.style.transition = 'all 0.5s ease';
