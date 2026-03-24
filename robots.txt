@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://zj-ai.vercel.app/sitemap.xml
